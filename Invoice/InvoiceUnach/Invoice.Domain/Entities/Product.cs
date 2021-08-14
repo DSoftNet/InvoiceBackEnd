@@ -4,7 +4,7 @@ using Invoice.Domain.SeedWork;
 
 namespace Invoice.Domain.Entities
 {
-    public class Product : BaseEntity
+    public class Product : BaseEntity   
     {
         #region Constructor & properties
 
@@ -15,12 +15,12 @@ namespace Invoice.Domain.Entities
         public bool IsIva { get; private set; }
         public int Stock { get; private set; }
         public bool IsExpiration { get; private set; }
-        
         public DateTime ExpirationAt { get; private set; }
         public bool Status { get; private set; }
         public string RegistrationDate { get; private set; }
-        public DateTime UpdateDate { get; private set; }
+        public string UpdateDate { get; private set; }
         public int Userld { get; private set; }
+    
         
 
         protected Product()
@@ -28,7 +28,7 @@ namespace Invoice.Domain.Entities
             Id = Guid.NewGuid();
         }
 
-        public Product(string name, string description, string code,  decimal price,bool IsIva, int stock,bool IsExpiration, ExpirationAt, bool status, string RegistrationDate, string UpdateDate, int UserId)
+        public Product(string name, string description, string code,  decimal price,bool IsIva, int stock,bool IsExpiration, DateTime ExpirationAt, bool status, DateTime RegistrationDate, DateTime UpdateDate, int UserId)
         {
             SetName(name);
             SetDescription(description);
@@ -90,7 +90,7 @@ namespace Invoice.Domain.Entities
 
        
 
-        public void SetExpirationAt(string value)
+        public void SetExpirationAt(DateTime value)
         {
             ExpirationAt = value;
         }
@@ -100,15 +100,20 @@ namespace Invoice.Domain.Entities
             Status = value;
         }
 
-        public void SetRegistrationDate(string value)
+        public void SetRegistrationDate(DateTime value)
         {
 
             RegistrationDate = value;
         }
-        public void SetUpdateDate(string value)
+        public void SetUpdateDate(DateTime value)
         {
 
             UpdateDate = value;
+        }
+        public void SetUserId(int value)
+        {
+
+            IdUser = value;
         }
 
         #endregion
