@@ -15,10 +15,11 @@ namespace Invoice.Domain.Entities
         public bool IsIva { get; private set; }
         public int Stock { get; private set; }
         public bool IsExpiration { get; private set; }
-        public Data ExpirationAt { get; private set; }
+        
+        public DateTime ExpirationAt { get; private set; }
         public bool Status { get; private set; }
         public string RegistrationDate { get; private set; }
-        public string UpdateDate { get; private set; }
+        public DateTime UpdateDate { get; private set; }
         public int Userld { get; private set; }
         
 
@@ -27,7 +28,7 @@ namespace Invoice.Domain.Entities
             Id = Guid.NewGuid();
         }
 
-        public Product(string name, string description, string code,  decimal price,bool IsIva, int stock,bool IsExpiration,string ExpirationAt, bool status, string RegistrationDate, string UpdateDate, int UserId)
+        public Product(string name, string description, string code,  decimal price,bool IsIva, int stock,bool IsExpiration, ExpirationAt, bool status, string RegistrationDate, string UpdateDate, int UserId)
         {
             SetName(name);
             SetDescription(description);
