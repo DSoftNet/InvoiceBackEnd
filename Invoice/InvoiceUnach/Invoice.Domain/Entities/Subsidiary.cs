@@ -14,7 +14,7 @@ namespace Invoice.Domain.Entities
         public string Phone2 { get; private set; }
         public DateTime RegistrationDate { get; private set; }
         public DateTime UpdateDate { get; private set; }
-		public Guid UserId{ get; private set; }
+		public Guid UserId { get; private set; }
 
 
          protected Subsidiary()
