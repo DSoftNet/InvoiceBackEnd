@@ -153,7 +153,7 @@ namespace Invoice.Domain.Entities
 
         #endregion
 
-        #region Public Method
+     
         public void CreateItemCatalog(string name, string value,
             string description, bool status, string codeCatalog)
         {
