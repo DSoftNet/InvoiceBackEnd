@@ -15,13 +15,11 @@ namespace Invoice.Domain.Entities
         {
             Id = Guid.NewGuid();
         }
-
         public UserRol(string rolName, Guid userId)
         {
             SetRolName(rolName);
             SetUserId(userId);
         }
-
         #endregion
 
         #region Setters
