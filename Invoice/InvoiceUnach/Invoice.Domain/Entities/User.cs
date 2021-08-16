@@ -154,13 +154,11 @@ namespace Invoice.Domain.Entities
         #endregion
 
         #region Public Method
-
         public void CreateItemCatalog(string name, string value,
             string description, bool status, string codeCatalog)
         {
             var itemCatalog = new ItemCatalog(name, Identification, value, description, status, codeCatalog);
         }
-
         #endregion
     }
 }
