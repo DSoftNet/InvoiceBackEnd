@@ -9,8 +9,6 @@ namespace Invoice.Domain.Entities
     {
         #region Constructor & properties
 
-
-
         public string FirstName { get; private set; }
         public string SecondName { get; private set; }
         public string FirstLastName { get; private set; }
