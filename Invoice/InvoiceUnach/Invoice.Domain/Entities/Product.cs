@@ -19,25 +19,16 @@ namespace Invoice.Domain.Entities
         public bool Status { get; private set; }
         public DateTime RegistrationDate { get; private set; }
         public DateTime UpdateDate { get; private set; }
-<<<<<<< HEAD
         public Guid UserId { get; private set; }
-=======
-        public int Userld { get; private set; }
->>>>>>> b186cb805d1c28249c730e96f124c95ce0550fe1
 
         protected Product()
         {
             Id = Guid.NewGuid();
         }
 
-<<<<<<< HEAD
         public Product(string name, string description, string code, decimal price, bool isIva, int stock,
             bool isExpiration, DateTime expirationAt, bool status, DateTime registrationDate, DateTime updateDate,
             Guid userId)
-=======
-        public Product(string name, string description, string code,  decimal price, bool IsIva, int stock, bool IsExpiration,
-            DateTime ExpirationAt, bool status, DateTime RegistrationDate, DateTime UpdateDate, int UserId)
->>>>>>> b186cb805d1c28249c730e96f124c95ce0550fe1
         {
             SetName(name);
             SetDescription(description);
@@ -45,21 +36,12 @@ namespace Invoice.Domain.Entities
             SetPrice(price);
             SetIsIva(isIva);
             SetStock(stock);
-<<<<<<< HEAD
             SetIsExpiration(isExpiration);
             SetExpirationAt(expirationAt);
             SetStatus(status);
             SetRegistrationDate(registrationDate);
             SetUpdateDate(updateDate);
             SetUserId(userId);
-=======
-            SetIsExpiration(IsExpiration);
-            SetExpirationAt(ExpirationAt);
-            SetStatus(status);
-            SetRegistrationDate(RegistrationDate);
-            SetUpdateDate(UpdateDate);
-            SetUserId(UserId);
->>>>>>> b186cb805d1c28249c730e96f124c95ce0550fe1
         }
 
         #endregion
@@ -95,10 +77,6 @@ namespace Invoice.Domain.Entities
 
         public void SetStock(int value)
         {
-<<<<<<< HEAD
-=======
-            //if (int.IsNullOrEmpty(value)) throw new InvoiceDomainException("The value is required.");
->>>>>>> b186cb805d1c28249c730e96f124c95ce0550fe1
             Stock = value;
         }
         
@@ -129,11 +107,7 @@ namespace Invoice.Domain.Entities
 
         public void SetUserId(Guid value)
         {
-<<<<<<< HEAD
             UserId = value;
-=======
-            Userld = value;
->>>>>>> b186cb805d1c28249c730e96f124c95ce0550fe1
         }
 
         #endregion
