@@ -131,7 +131,7 @@ namespace Invoice.Domain.Entities
         
         public void SetUserId(Guid value)
         {
-            if (value==Guid.Empty) throw new InvoiceDomainException("The userid is required.");
+            if (value == Guid.Empty) throw new InvoiceDomainException("The userid is required.");
             UserId = value;
         }
 
