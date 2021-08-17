@@ -4,7 +4,7 @@ using Invoice.Domain.SeedWork;
 
 namespace Invoice.Domain.Entities
 {
-    public class Product : BaseEntity   
+    public class Product : BaseEntity
     {
         #region Constructor & properties
 
@@ -17,30 +17,31 @@ namespace Invoice.Domain.Entities
         public bool IsExpiration { get; private set; }
         public DateTime ExpirationAt { get; private set; }
         public bool Status { get; private set; }
-        public string RegistrationDate { get; private set; }
-        public string UpdateDate { get; private set; }
-        public int Userld { get; private set; }
+        public DateTime RegistrationDate { get; private set; }
+        public DateTime UpdateDate { get; private set; }
+        public Guid UserId { get; private set; }
 
         protected Product()
         {
             Id = Guid.NewGuid();
         }
 
-        public Product(string name, string description, string code,  decimal price, bool IsIva, int stock, bool IsExpiration,
-         DateTime ExpirationAt, bool status, DateTime RegistrationDate, DateTime UpdateDate, int UserId)
+        public Product(string name, string description, string code, decimal price, bool isIva, int stock,
+            bool isExpiration, DateTime expirationAt, bool status, DateTime registrationDate, DateTime updateDate,
+            Guid userId)
         {
             SetName(name);
             SetDescription(description);
             SetCode(code);
             SetPrice(price);
-            SetIsIva(IsIva);
+            SetIsIva(isIva);
             SetStock(stock);
-            setIsExpiration(IsExpiration);
-            setExpirationAt(ExpirationAt);
-            setStatus(status);
-            setRegistrationDate(RegistrationDate);
-            setUpdateDate(UpdateDate);
-            setUserId(UserId);
+            SetIsExpiration(isExpiration);
+            SetExpirationAt(expirationAt);
+            SetStatus(status);
+            SetRegistrationDate(registrationDate);
+            SetUpdateDate(updateDate);
+            SetUserId(userId);
         }
 
         #endregion
@@ -76,13 +77,12 @@ namespace Invoice.Domain.Entities
 
         public void SetStock(int value)
         {
-            if (int.IsNullOrEmpty(value)) throw new InvoiceDomainException("The value is required.");
             Stock = value;
         }
 
         public void SetIsExpiration(bool value)
         {
-            Value = value;
+            IsExpiration = value;
         }
 
         public void SetExpirationAt(DateTime value)
@@ -105,9 +105,9 @@ namespace Invoice.Domain.Entities
             UpdateDate = value;
         }
 
-        public void SetUserId(int value)
+        public void SetUserId(Guid value)
         {
-            IdUser = value;
+            UserId = value;
         }
 
         #endregion
