@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Invoice.Domain.Exceptions;
 using Invoice.Domain.SeedWork;
 
@@ -17,8 +17,8 @@ namespace Invoice.Domain.Entities
         public bool IsExpiration { get; private set; }
         public DateTime ExpirationAt { get; private set; }
         public bool Status { get; private set; }
-        public string RegistrationDate { get; private set; }
-        public string UpdateDate { get; private set; }
+        public DateTime RegistrationDate { get; private set; }
+        public DateTime UpdateDate { get; private set; }
         public int Userld { get; private set; }
 
         protected Product()
@@ -27,7 +27,7 @@ namespace Invoice.Domain.Entities
         }
 
         public Product(string name, string description, string code,  decimal price, bool IsIva, int stock, bool IsExpiration,
-         DateTime ExpirationAt, bool status, DateTime RegistrationDate, DateTime UpdateDate, int UserId)
+            DateTime ExpirationAt, bool status, DateTime RegistrationDate, DateTime UpdateDate, int UserId)
         {
             SetName(name);
             SetDescription(description);
@@ -35,12 +35,12 @@ namespace Invoice.Domain.Entities
             SetPrice(price);
             SetIsIva(IsIva);
             SetStock(stock);
-            setIsExpiration(IsExpiration);
-            setExpirationAt(ExpirationAt);
-            setStatus(status);
-            setRegistrationDate(RegistrationDate);
-            setUpdateDate(UpdateDate);
-            setUserId(UserId);
+            SetIsExpiration(IsExpiration);
+            SetExpirationAt(ExpirationAt);
+            SetStatus(status);
+            SetRegistrationDate(RegistrationDate);
+            SetUpdateDate(UpdateDate);
+            SetUserId(UserId);
         }
 
         #endregion
@@ -76,15 +76,15 @@ namespace Invoice.Domain.Entities
 
         public void SetStock(int value)
         {
-            if (int.IsNullOrEmpty(value)) throw new InvoiceDomainException("The value is required.");
+            //if (int.IsNullOrEmpty(value)) throw new InvoiceDomainException("The value is required.");
             Stock = value;
         }
-
+        
         public void SetIsExpiration(bool value)
         {
-            Value = value;
+            IsExpiration = value;
         }
-
+        
         public void SetExpirationAt(DateTime value)
         {
             ExpirationAt = value;
@@ -107,7 +107,7 @@ namespace Invoice.Domain.Entities
 
         public void SetUserId(int value)
         {
-            IdUser = value;
+            Userld = value;
         }
 
         #endregion
