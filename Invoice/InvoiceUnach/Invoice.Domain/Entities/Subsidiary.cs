@@ -23,15 +23,15 @@ namespace Invoice.Domain.Entities
         }
 
         public Subsidiary(string name, string address, string phone1, string phone2, 
-			   DateTime registrationdate, DateTime updatetime, Guid userid )
+			   DateTime registrationDate, DateTime updateDate, Guid userId )
 		{
 			SetName(name);
             SetAddress(address);
             SetPhone1(phone1);
             SetPhone2(phone2);
-            SetRegistrationDate(registrationdate);
-            SetUpdateDate(updatetime);
-            SetUserId(userid);
+            SetRegistrationDate(registrationDate);
+            SetUpdateDate(updateDate);
+            SetUserId(userId);
         }
 
         #endregion
@@ -71,6 +71,7 @@ namespace Invoice.Domain.Entities
         public void SetUserId(Guid value)
         {
             if (value == Guid.Empty) throw new InvoiceDomainException("The UserId is required.");
+            
             UserId = value;
         }
 
