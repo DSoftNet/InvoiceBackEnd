@@ -22,7 +22,6 @@ namespace Invoice.Domain.Entities
         public bool Status { get; private set; }
         public DateTime RegistrationDate { get; private set; }
         public DateTime UpdateDate { get; private set; }
-        
         public Guid UserId { get; private set; }
 
         private readonly List<ItemCatalog> _itemCatalogs;
@@ -81,6 +80,8 @@ namespace Invoice.Domain.Entities
         
         public void SetIdentificationType(string value)
         {
+            if (string.IsNullOrEmpty(value)) throw new InvoiceDomainException("The identification type is required.");
+
             IdentificationType = value;
         }
         
@@ -130,7 +131,7 @@ namespace Invoice.Domain.Entities
         
         public void SetUserId(Guid value)
         {
-            if (value.CompareTo(Guid.Empty)==0) throw new InvoiceDomainException("The userid is required.");
+            if (value==Guid.Empty) throw new InvoiceDomainException("The userid is required.");
             UserId = value;
         }
 
