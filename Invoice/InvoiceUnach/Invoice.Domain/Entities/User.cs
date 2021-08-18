@@ -27,8 +27,6 @@ namespace Invoice.Domain.Entities
         public DateTime RegistrationDate { get; private set; }
         public DateTime UpdateDate { get; private set; }
 
-        public Guid UserId { get; private set; }
-
         private readonly List<ItemCatalog> _itemCatalogs;
 
         protected User()
@@ -40,7 +38,7 @@ namespace Invoice.Domain.Entities
         public User(string firstName, string secondName, string firstLastName, string secondLastName,
             string identificationType, string identification, string email, string address, string phone,
             string cellPhone, string userName, string password, bool status, DateTime registrationDate,
-            DateTime updateDate, Guid userId)
+            DateTime updateDate)
         {
             SetFirstName(firstName);
             SetSecondName(secondName);
@@ -57,7 +55,6 @@ namespace Invoice.Domain.Entities
             SetStatus(status);
             SetRegistrationDate(registrationDate);
             SetUpdateDate(updateDate);
-            SetUserId(userId);
         }
 
         #endregion
@@ -147,12 +144,6 @@ namespace Invoice.Domain.Entities
             UpdateDate = value;
         }
 
-        public void SetUserId(Guid value)
-        {
-            if (value.CompareTo(Guid.Empty) == 0) throw new InvoiceDomainException("The userid is required.");
-            UserId = value;
-        }
-
         #endregion
 
         #region Public Method
@@ -163,6 +154,6 @@ namespace Invoice.Domain.Entities
             var itemCatalog = new ItemCatalog(name, Identification, value, description, status, codeCatalog);
         }
 
-        #_endregion
+        #endregion
     }
 }
