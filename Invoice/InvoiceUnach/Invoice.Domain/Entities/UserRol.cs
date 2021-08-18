@@ -33,7 +33,7 @@ namespace Invoice.Domain.Entities
 
       public void SetUserId(Guid value)
         {
-            if (value==null) throw new InvoiceDomainException("The code catalog is required.");
+            if (value==Guid.empty) throw new InvoiceDomainException("The user Id is required.");
 
             UserId = value;
           
