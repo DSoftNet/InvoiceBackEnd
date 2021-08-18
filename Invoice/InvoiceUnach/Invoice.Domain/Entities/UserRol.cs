@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Invoice.Domain.Exceptions;
 using Invoice.Domain.SeedWork;
 
@@ -31,9 +31,9 @@ namespace Invoice.Domain.Entities
             RolName = value;
         }
 
-      public void SetUserId(Guid value)
+        public void SetUserId(Guid value)
         {
-            if (value==Guid.empty) throw new InvoiceDomainException("The user Id is required.");
+            if (value==Guid.empty) throw new InvoiceDomainException("The code catalog is required.");
 
             UserId = value;
           
