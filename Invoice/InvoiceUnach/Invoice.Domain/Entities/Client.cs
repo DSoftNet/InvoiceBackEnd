@@ -32,7 +32,9 @@ namespace Invoice.Domain.Entities
             _itemCatalogs = new List<ItemCatalog>();
         }
         
-        public Client(string firstName, string secondName, string firstLastName, string secondLastName, string identificationType, string identification, string email, string address, string phone, string cellPhone, bool status, DateTime registrationDate, DateTime updateDate, Guid userId)
+        public Client(string firstName, string secondName, string firstLastName, string secondLastName, 
+            string identificationType, string identification, string email, string address, string phone,
+            string cellPhone, bool status, DateTime registrationDate, DateTime updateDate, Guid userId)
         {
             SetFirstName(firstName);
             SetSecondName(secondName);
@@ -68,7 +70,7 @@ namespace Invoice.Domain.Entities
         
         public void SetFirstLastName(string value)
         {
-            if (string.IsNullOrEmpty(value)) throw new InvoiceDomainException("The firstlastname is required.");
+            if (string.IsNullOrEmpty(value)) throw new InvoiceDomainException("The firstLastname is required.");
 
             FirstLastName = value;
         }
