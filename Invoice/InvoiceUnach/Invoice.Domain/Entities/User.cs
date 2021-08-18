@@ -163,6 +163,6 @@ namespace Invoice.Domain.Entities
             var itemCatalog = new ItemCatalog(name, Identification, value, description, status, codeCatalog);
         }
 
-        #endregion
+        #_endregion
     }
 }
