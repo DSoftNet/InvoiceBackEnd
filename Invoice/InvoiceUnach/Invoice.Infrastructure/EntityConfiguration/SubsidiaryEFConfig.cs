@@ -35,7 +35,7 @@ namespace Invoice.Infrastructure.EntityConfiguration
             builder.HasOne<User>()
                 .WithMany()
                 .HasForeignKey(x => x.UserId)
-                .HasPrincipalKey(x => x.Id);
+                .HasPrincipalKey(x => x.Id); 
         }
     }
 }
