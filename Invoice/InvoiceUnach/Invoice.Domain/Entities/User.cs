@@ -35,6 +35,7 @@ namespace Invoice.Domain.Entities
         {
             Id = Guid.NewGuid();
             _userRols = new List<UserRol>();
+            _clients = new List<Client>();
         }
 
         public User(string firstName, string secondName, string firstLastName, string secondLastName,
@@ -144,6 +145,15 @@ namespace Invoice.Domain.Entities
         {
             var userRol = new UserRol(rolName, Id);
             _userRols.Add(userRol);
+        }
+        
+        public void CreateClient(string firstName, string secondName, string firstLastName, string secondLastName, 
+            string identificationType, string identification, string email, string address, string phone,
+            string cellPhone, bool status)
+        {
+            var client = new Client(firstName, secondName, firstLastName, secondLastName, identificationType,
+                identification, email, address, phone, cellPhone, status, Id);
+            _clients.Add(client);
         }
 
         #endregion

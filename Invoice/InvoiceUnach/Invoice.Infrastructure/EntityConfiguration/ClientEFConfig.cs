@@ -18,32 +18,32 @@ namespace Invoice.Infrastructure.EntityConfiguration
 
             builder.Property(x => x.SecondName)
                 .HasMaxLength(30);
-
+            
             builder.Property(x => x.FirstLastName)
                 .HasMaxLength(30)
                 .IsRequired();
 
             builder.Property(x => x.SecondLastName)
                 .HasMaxLength(30);
-
+            
             builder.Property(x => x.IdentificationType)
                 .HasMaxLength(20)
                 .IsRequired();
-
+            
             builder.Property(x => x.Identification)
                 .HasMaxLength(30)
                 .IsRequired();
-
+            
             builder.Property(x => x.Email)
                 .HasMaxLength(255)
                 .IsRequired();
-
+            
             builder.Property(x => x.Address)
                 .HasMaxLength(255);
 
             builder.Property(x => x.Phone)
                 .HasMaxLength(10);
-
+            
             builder.Property(x => x.CellPhone)
                 .HasMaxLength(10);
 
@@ -56,7 +56,7 @@ namespace Invoice.Infrastructure.EntityConfiguration
 
             builder.Property(x => x.UpdateAt)
                 .IsRequired();
-
+            
             builder.Property(x => x.UserId)
                 .IsRequired();
 
@@ -64,9 +64,9 @@ namespace Invoice.Infrastructure.EntityConfiguration
                 .WithMany()
                 .HasForeignKey(x => x.IdentificationType)
                 .HasPrincipalKey(x => x.Code);
-
+            
             builder.HasIndex(x => new {x.UserId})
                 .IsUnique();
         }
     }
-} 
+}

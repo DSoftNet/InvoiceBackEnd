@@ -24,17 +24,14 @@ namespace Invoice.Domain.Entities
         public DateTime UpdateAt { get; private set; }
         public Guid UserId { get; private set; }
 
-        private readonly List<ItemCatalog> _itemCatalogs;
-        
         protected Client()
         {
             Id = Guid.NewGuid();
-            _itemCatalogs = new List<ItemCatalog>();
         }
         
         public Client(string firstName, string secondName, string firstLastName, string secondLastName, 
             string identificationType, string identification, string email, string address, string phone,
-            string cellPhone, bool status, DateTime registrationDate, DateTime updateDate, Guid userId)
+            string cellPhone, bool status, Guid userId)
         {
             SetFirstName(firstName);
             SetSecondName(secondName);
@@ -131,12 +128,6 @@ namespace Invoice.Domain.Entities
 
         #region Public Method
 
-        public void CreateItemCatalog(string name, string value,
-            string description, bool status, string codeCatalog)
-        {
-            var itemCatalog = new ItemCatalog(name, Identification, value, description, status, codeCatalog);
-        }
-        
         #endregion
     }
 }
