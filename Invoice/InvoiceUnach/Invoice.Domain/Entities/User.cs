@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using Invoice.Domain.Exceptions;
 using Invoice.Domain.SeedWork;
@@ -8,8 +8,6 @@ namespace Invoice.Domain.Entities
     public class User : BaseEntity
     {
         #region Constructor & properties
-
-
 
         public string FirstName { get; private set; }
         public string SecondName { get; private set; }
@@ -24,21 +22,22 @@ namespace Invoice.Domain.Entities
         public string UserName { get; private set; }
         public string Password { get; private set; }
         public bool Status { get; private set; }
-        public DateTime RegistrationDate { get; private set; }
-        public DateTime UpdateDate { get; private set; }
+        public DateTime CreateAt { get; private set; }
+        public DateTime UpdateAt { get; private set; }
 
-        private readonly List<ItemCatalog> _itemCatalogs;
+        private readonly List<UserRol> _userRols;
+        private IReadOnlyCollection<UserRol> UserRols => _userRols;
 
         protected User()
         {
             Id = Guid.NewGuid();
-            _itemCatalogs = new List<ItemCatalog>();
+            _userRols = new List<UserRol>();
         }
 
         public User(string firstName, string secondName, string firstLastName, string secondLastName,
             string identificationType, string identification, string email, string address, string phone,
-            string cellPhone, string userName, string password, bool status, DateTime registrationDate,
-            DateTime updateDate)
+            string cellPhone, string userName, string password, bool status, DateTime createAt,
+            DateTime updateAt)
         {
             SetFirstName(firstName);
             SetSecondName(secondName);
@@ -53,8 +52,8 @@ namespace Invoice.Domain.Entities
             SetUserName(userName);
             SetPassword(password);
             SetStatus(status);
-            SetRegistrationDate(registrationDate);
-            SetUpdateDate(updateDate);
+            CreateAt = DateTime.UtcNow;
+            UpdateAt = DateTime.UtcNow;
         }
 
         #endregion
@@ -134,24 +133,14 @@ namespace Invoice.Domain.Entities
             Status = value;
         }
 
-        public void SetRegistrationDate(DateTime value)
-        {
-            RegistrationDate = value;
-        }
-
-        public void SetUpdateDate(DateTime value)
-        {
-            UpdateDate = value;
-        }
-
         #endregion
 
         #region Public Method
 
-        public void CreateItemCatalog(string name, string value,
-            string description, bool status, string codeCatalog)
+        public void CreateUserRol(string rolName)
         {
-            var itemCatalog = new ItemCatalog(name, Identification, value, description, status, codeCatalog);
+            var userRol = new UserRol(rolName, Id);
+            _userRols.Add(userRol);
         }
 
         #endregion
