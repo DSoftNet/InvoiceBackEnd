@@ -27,6 +27,9 @@ namespace Invoice.Domain.Entities
 
         private readonly List<UserRol> _userRols;
         private IReadOnlyCollection<UserRol> UserRols => _userRols;
+        
+        private readonly List<Client> _clients;
+        private IReadOnlyCollection<Client> Clients => _clients;
 
         protected User()
         {
