@@ -14,7 +14,7 @@ namespace Invoice.UnitTests.Domain.Entities
             Assert.Throws<InvoiceDomainException>(() =>
                 new Catalog(name, "code", "value", "description", true));
         }
-        
+
         [Theory]
         [InlineData("")]
         [InlineData(null)]
@@ -22,6 +22,15 @@ namespace Invoice.UnitTests.Domain.Entities
         {
             Assert.Throws<InvoiceDomainException>(() =>
                 new Catalog("name", code, "value", "description", true));
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public void Constructor_ValueIsInvalid_ThrowInvoiceDomainException(string value)
+        {
+            Assert.Throws<InvoiceDomainException>(() =>
+                new Catalog("name", "code", value, "description", true));
         }
     }
 }
