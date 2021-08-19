@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Invoice.Domain.Exceptions;
 using Invoice.Domain.SeedWork;
 
@@ -15,11 +15,13 @@ namespace Invoice.Domain.Entities
         {
             Id = Guid.NewGuid();
         }
+
         public UserRol(string rolName, Guid userId)
         {
             SetRolName(rolName);
             SetUserId(userId);
         }
+
         #endregion
 
         #region Setters
@@ -31,15 +33,13 @@ namespace Invoice.Domain.Entities
             RolName = value;
         }
 
-      public void SetUserId(Guid value)
+        public void SetUserId(Guid value)
         {
-            if (value==null) throw new InvoiceDomainException("The code catalog is required.");
+            if (value == Guid.Empty) throw new InvoiceDomainException("The code catalog is required.");
 
             UserId = value;
-          
         }
 
-       
         #endregion
     }
 }
