@@ -12,36 +12,34 @@ namespace Invoice.UnitTests.Domain.Entities
         public void Constructor_NameIsInvalid_ThrowInvoiceDomainException(string name)
         {
             Assert.Throws<InvoiceDomainException>(() =>
-                new ItemCatalog(name, "code", "value", "description","codecatalog", true));
+                new ItemCatalog(name, "code", "value", "description", true, "codeCatalog"));
         }
-        
+
         [Theory]
         [InlineData("")]
         [InlineData(null)]
         public void Constructor_CodeIsInvalid_ThrowInvoiceDomainException(string code)
         {
             Assert.Throws<InvoiceDomainException>(() =>
-                new ItemCatalog("name", code, "value", "description","codecatalog", true));
+                new ItemCatalog("name", code, "value", "description", true, "codeCatalog"));
         }
-        
-         [Theory]
-         [InlineData("")]
-        [InlineData(null)]
-        public void Constructor_NameIsInvalid_ThrowInvoiceDomainException(string value)
-        {
-            Assert.Throws<InvoiceDomainException>(() =>
-                new ItemCatalog("name", "code", value, "description","codecatalog", true));
-        }
-        
+
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        public void Constructor_CodeIsInvalid_ThrowInvoiceDomainException(string codecatalog)
+        public void Constructor_ValueIsInvalid_ThrowInvoiceDomainException(string value)
         {
             Assert.Throws<InvoiceDomainException>(() =>
-                new ItemCatalog("name", "code", "value", "description",codecatalog, true));
+                new ItemCatalog("name", "code", value, "description", true, "codeCatalog"));
         }
-        
-        
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public void Constructor_CodeCatalogIsInvalid_ThrowInvoiceDomainException(string codeCatalog)
+        {
+            Assert.Throws<InvoiceDomainException>(() =>
+                new ItemCatalog("name", "code", "value", "description", true, codeCatalog));
+        }
     }
 }
