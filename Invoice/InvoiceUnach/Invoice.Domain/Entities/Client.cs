@@ -20,8 +20,8 @@ namespace Invoice.Domain.Entities
         public string Phone { get; private set; }
         public string CellPhone { get; private set; }
         public bool Status { get; private set; }
-        public DateTime RegistrationDate { get; private set; }
-        public DateTime UpdateDate { get; private set; }
+        public DateTime CreateAt { get; private set; }
+        public DateTime UpdateAt { get; private set; }
         public Guid UserId { get; private set; }
 
         private readonly List<ItemCatalog> _itemCatalogs;
@@ -47,8 +47,8 @@ namespace Invoice.Domain.Entities
             SetPhone(phone);
             SetCellPhone(cellPhone);
             SetStatus(status);
-            SetRegistrationDate(registrationDate);
-            SetUpdateDate(updateDate);
+            CreateAt = DateTime.UtcNow;
+            UpdateAt = DateTime.UtcNow;
             SetUserId(userId);
         }
 
@@ -120,17 +120,7 @@ namespace Invoice.Domain.Entities
         {
             Status = value;
         }
-        
-        public void SetRegistrationDate(DateTime value)
-        {
-            RegistrationDate = value;
-        }
-        
-        public void SetUpdateDate(DateTime value)
-        {
-            UpdateDate = value;
-        }
-        
+
         public void SetUserId(Guid value)
         {
             if (value == Guid.Empty) throw new InvoiceDomainException("The userid is required.");
