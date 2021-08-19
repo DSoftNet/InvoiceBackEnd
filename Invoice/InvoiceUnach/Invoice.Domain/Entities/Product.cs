@@ -79,12 +79,12 @@ namespace Invoice.Domain.Entities
         {
             Stock = value;
         }
-        
+
         public void SetIsExpiration(bool value)
         {
             IsExpiration = value;
         }
-        
+
         public void SetExpirationAt(DateTime value)
         {
             ExpirationAt = value;
