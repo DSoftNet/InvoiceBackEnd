@@ -14,8 +14,7 @@ namespace Invoice.UnitTests.Domain.Entities
         {
             Assert.Throws<InvoiceDomainException>(() =>
                 new Product(name, "lola", "aa1", 23, true, 24, true,
-                    DateTime.Now, true, DateTime.Now, DateTime.Now,
-                    Guid.Parse("5C60F693-BEF5-E011-A485-80EE7300C695")));
+                    DateTime.Now, true, Guid.Parse("5C60F693-BEF5-E011-A485-80EE7300C695")));
         }
 
         [Theory]
@@ -25,8 +24,7 @@ namespace Invoice.UnitTests.Domain.Entities
         {
             Assert.Throws<InvoiceDomainException>(() =>
                 new Product("lola", "lola", code, 23, true, 24, true,
-                    DateTime.Now, true, DateTime.Now, DateTime.Now,
-                    Guid.Parse("5C60F693-BEF5-E011-A485-80EE7300C695")));
+                    DateTime.Now, true, Guid.Parse("5C60F693-BEF5-E011-A485-80EE7300C695")));
         }
     }
 }
