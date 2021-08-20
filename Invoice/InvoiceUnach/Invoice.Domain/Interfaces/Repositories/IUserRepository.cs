@@ -6,11 +6,11 @@ using Invoice.Domain.SeedWork;
 
 namespace Invoice.Domain.Interfaces.Repositories
 {
-    public interface IUserRepositoty : IRepository<Catalog>
+    public interface IUserRepository : IRepository<User>
     {
-        Task<List<Catalog>> Gets();
-        Task<Catalog> Get(Guid id);
-        Catalog Add(Catalog catalog);
-        Catalog Update(Catalog catalog);
+        Task<List<User>> Gets();
+        Task<User> Get(Guid id);
+        User Add(User user);
+        User Update(User user);
     }
 }
