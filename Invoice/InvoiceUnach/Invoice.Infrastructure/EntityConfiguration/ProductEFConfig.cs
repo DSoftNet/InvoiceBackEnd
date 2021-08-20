@@ -34,8 +34,7 @@ namespace Invoice.Infrastructure.EntityConfiguration
                 .IsRequired();
 
             builder.Property(x => x.IsExpiration)
-                .HasMaxLength(10);
-        
+                
             builder.Property(x => x.ExpirationAt)
                 .IsRequired();
 
