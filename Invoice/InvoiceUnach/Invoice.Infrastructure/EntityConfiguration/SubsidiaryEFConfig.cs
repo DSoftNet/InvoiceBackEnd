@@ -32,10 +32,7 @@ namespace Invoice.Infrastructure.EntityConfiguration
             builder.Property(x => x.UpdateAt)
                 .IsRequired();
 
-            builder.HasOne<User>()
-                .WithMany()
-                .HasForeignKey(x => x.UserId)
-                .HasPrincipalKey(x => x.Id); 
+            
         }
     }
 }

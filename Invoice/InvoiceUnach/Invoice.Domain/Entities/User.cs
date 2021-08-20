@@ -27,11 +27,15 @@ namespace Invoice.Domain.Entities
 
         private readonly List<UserRol> _userRols;
         private IReadOnlyCollection<UserRol> UserRols => _userRols;
-
+        
+        private readonly List<Subsidiary> _subsidiaries;
+        private IReadOnlyCollection<Subsidiary> Subsidiaries => _subsidiaries;
         protected User()
         {
             Id = Guid.NewGuid();
             _userRols = new List<UserRol>();
+            _subsidiaries = new List<Subsidiary>();
+
         }
 
         public User(string firstName, string secondName, string firstLastName, string secondLastName,
@@ -141,6 +145,11 @@ namespace Invoice.Domain.Entities
         {
             var userRol = new UserRol(rolName, Id);
             _userRols.Add(userRol);
+        }
+        public void CreateSubsidiary(string name, string address, string phone1, string phone2)
+        {
+            var subsidiary = new Subsidiary(name, address,phone1,phone2, Id);
+            _subsidiaries.Add(subsidiary);
         }
 
         #endregion
