@@ -34,12 +34,17 @@ namespace Invoice.Domain.Entities
         private readonly List<Client> _clients;
         public IReadOnlyCollection<Client> Clients => _clients;
 
+        private readonly List<Product> _products;
+        public IReadOnlyCollection<Product> Products => _products;
+
+
         protected User()
         {
             Id = Guid.NewGuid();
             _userRols = new List<UserRol>();
             _subsidiaries = new List<Subsidiary>();
             _clients = new List<Client>();
+            _products=new List<Product>();
         }
 
         public User(string firstName, string secondName, string firstLastName, string secondLastName,
@@ -167,6 +172,16 @@ namespace Invoice.Domain.Entities
                 identification, email, address, phone, cellPhone, status, Id);
             _clients.Add(client);
         }
+
+
+        public void CreateProduct(string name, string description, string code, decimal price, bool isIva, int stock,
+            bool isExpiration, DateTime expirationAt, bool status, Guid userId)
+            {
+                var product= new Product(name, description, code, price, isIva,  stock, isExpiration, expirationAt, 
+                status, userId);
+                _products.Add(product);
+
+            }
 
         #endregion
     }
