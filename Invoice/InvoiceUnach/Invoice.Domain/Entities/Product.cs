@@ -17,8 +17,8 @@ namespace Invoice.Domain.Entities
         public bool IsExpiration { get; private set; }
         public DateTime ExpirationAt { get; private set; }
         public bool Status { get; private set; }
-        public DateTime RegistrationDate { get; private set; }
-        public DateTime UpdateDate { get; private set; }
+        public DateTime CreateAt { get; private set; }
+        public DateTime UpdateAt { get; private set; }
         public Guid UserId { get; private set; }
 
         protected Product()
@@ -27,8 +27,7 @@ namespace Invoice.Domain.Entities
         }
 
         public Product(string name, string description, string code, decimal price, bool isIva, int stock,
-            bool isExpiration, DateTime expirationAt, bool status, DateTime registrationDate, DateTime updateDate,
-            Guid userId)
+            bool isExpiration, DateTime expirationAt, bool status,Guid userId)
         {
             SetName(name);
             SetDescription(description);
@@ -39,8 +38,8 @@ namespace Invoice.Domain.Entities
             SetIsExpiration(isExpiration);
             SetExpirationAt(expirationAt);
             SetStatus(status);
-            SetRegistrationDate(registrationDate);
-            SetUpdateDate(updateDate);
+            CreateAt = DateTime.UtcNow;
+            UpdateAt = DateTime.UtcNow;
             SetUserId(userId);
         }
 
@@ -95,16 +94,7 @@ namespace Invoice.Domain.Entities
             Status = value;
         }
 
-        public void SetRegistrationDate(DateTime value)
-        {
-            RegistrationDate = value;
-        }
-
-        public void SetUpdateDate(DateTime value)
-        {
-            UpdateDate = value;
-        }
-
+       
         public void SetUserId(Guid value)
         {
             UserId = value;

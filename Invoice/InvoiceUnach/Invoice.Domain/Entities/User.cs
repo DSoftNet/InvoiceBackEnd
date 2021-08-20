@@ -175,11 +175,10 @@ namespace Invoice.Domain.Entities
 
 
         public void CreateProduct(string name, string description, string code, decimal price, bool isIva, int stock,
-            bool isExpiration, DateTime expirationAt, bool status, DateTime registrationDate, DateTime updateDate,
-            Guid userId)
+            bool isExpiration, DateTime expirationAt, bool status, Guid userId)
             {
                 var product= new Product(name, description, code, price, isIva,  stock, isExpiration, expirationAt, 
-                status, registrationDate, updateDate, userId);
+                status, userId);
                 _products.Add(product);
 
             }
