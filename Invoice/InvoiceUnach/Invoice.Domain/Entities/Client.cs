@@ -20,21 +20,18 @@ namespace Invoice.Domain.Entities
         public string Phone { get; private set; }
         public string CellPhone { get; private set; }
         public bool Status { get; private set; }
-        public DateTime RegistrationDate { get; private set; }
-        public DateTime UpdateDate { get; private set; }
+        public DateTime CreateAt { get; private set; }
+        public DateTime UpdateAt { get; private set; }
         public Guid UserId { get; private set; }
 
-        private readonly List<ItemCatalog> _itemCatalogs;
-        
         protected Client()
         {
             Id = Guid.NewGuid();
-            _itemCatalogs = new List<ItemCatalog>();
         }
         
         public Client(string firstName, string secondName, string firstLastName, string secondLastName, 
             string identificationType, string identification, string email, string address, string phone,
-            string cellPhone, bool status, DateTime registrationDate, DateTime updateDate, Guid userId)
+            string cellPhone, bool status, Guid userId)
         {
             SetFirstName(firstName);
             SetSecondName(secondName);
@@ -47,8 +44,8 @@ namespace Invoice.Domain.Entities
             SetPhone(phone);
             SetCellPhone(cellPhone);
             SetStatus(status);
-            SetRegistrationDate(registrationDate);
-            SetUpdateDate(updateDate);
+            CreateAt = DateTime.UtcNow;
+            UpdateAt = DateTime.UtcNow;
             SetUserId(userId);
         }
 
@@ -120,17 +117,7 @@ namespace Invoice.Domain.Entities
         {
             Status = value;
         }
-        
-        public void SetRegistrationDate(DateTime value)
-        {
-            RegistrationDate = value;
-        }
-        
-        public void SetUpdateDate(DateTime value)
-        {
-            UpdateDate = value;
-        }
-        
+
         public void SetUserId(Guid value)
         {
             if (value == Guid.Empty) throw new InvoiceDomainException("The userid is required.");
@@ -141,12 +128,6 @@ namespace Invoice.Domain.Entities
 
         #region Public Method
 
-        public void CreateItemCatalog(string name, string value,
-            string description, bool status, string codeCatalog)
-        {
-            var itemCatalog = new ItemCatalog(name, Identification, value, description, status, codeCatalog);
-        }
-        
         #endregion
     }
 }

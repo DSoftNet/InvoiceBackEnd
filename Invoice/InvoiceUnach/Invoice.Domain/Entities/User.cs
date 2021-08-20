@@ -30,12 +30,16 @@ namespace Invoice.Domain.Entities
         
         private readonly List<Subsidiary> _subsidiaries;
         private IReadOnlyCollection<Subsidiary> Subsidiaries => _subsidiaries;
+        
+        private readonly List<Client> _clients;
+        private IReadOnlyCollection<Client> Clients => _clients;
+
         protected User()
         {
             Id = Guid.NewGuid();
             _userRols = new List<UserRol>();
             _subsidiaries = new List<Subsidiary>();
-
+            _clients = new List<Client>();
         }
 
         public User(string firstName, string secondName, string firstLastName, string secondLastName,
@@ -146,10 +150,20 @@ namespace Invoice.Domain.Entities
             var userRol = new UserRol(rolName, Id);
             _userRols.Add(userRol);
         }
+
         public void CreateSubsidiary(string name, string address, string phone1, string phone2)
         {
             var subsidiary = new Subsidiary(name, address,phone1,phone2, Id);
             _subsidiaries.Add(subsidiary);
+        }
+        
+        public void CreateClient(string firstName, string secondName, string firstLastName, string secondLastName, 
+            string identificationType, string identification, string email, string address, string phone,
+            string cellPhone, bool status)
+        {
+            var client = new Client(firstName, secondName, firstLastName, secondLastName, identificationType,
+                identification, email, address, phone, cellPhone, status, Id);
+            _clients.Add(client);
         }
 
         #endregion
