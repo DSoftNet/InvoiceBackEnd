@@ -66,12 +66,26 @@ namespace Invoice.Infrastructure.EntityConfiguration
             builder.HasOne<ItemCatalog>()
                 .WithMany()
                 .HasForeignKey(x => x.IdentificationType)
-                .HasPrincipalKey(x => x.Code);
+                .HasPrincipalKey(x => x.Code)
+                .OnDelete(DeleteBehavior.Restrict);
             
             builder.HasOne<ItemCatalog>()
                 .WithMany()
                 .HasForeignKey(x => x.Status)
-                .HasPrincipalKey(x => x.Code);
+                .HasPrincipalKey(x => x.Code)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            builder.Metadata
+                .FindNavigation(nameof(User.UserRols))
+                .SetPropertyAccessMode(PropertyAccessMode.Field);
+            
+            builder.Metadata
+                .FindNavigation(nameof(User.Subsidiaries))
+                .SetPropertyAccessMode(PropertyAccessMode.Field);
+            
+            builder.Metadata
+                .FindNavigation(nameof(User.Clients))
+                .SetPropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

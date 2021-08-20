@@ -22,7 +22,8 @@ namespace Invoice.Infrastructure.EntityConfiguration
             builder.HasOne<ItemCatalog>()
                 .WithMany()
                 .HasForeignKey(x => x.RolName)
-                .HasPrincipalKey(x => x.Code);
+                .HasPrincipalKey(x => x.Code)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasIndex(x => new {x.UserId})
                 .IsUnique();

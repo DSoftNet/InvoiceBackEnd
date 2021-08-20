@@ -31,8 +31,6 @@ namespace Invoice.Infrastructure.EntityConfiguration
 
             builder.Property(x => x.UpdateAt)
                 .IsRequired();
-
-            
         }
     }
 }

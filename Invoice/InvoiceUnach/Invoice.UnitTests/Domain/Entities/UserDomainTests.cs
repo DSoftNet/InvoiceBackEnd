@@ -15,9 +15,9 @@ namespace Invoice.UnitTests.Domain.Entities
             Assert.Throws<InvoiceDomainException>(() =>
                 new User(firstName, "secondName", "firstLastName", "secondLastName",
                     "identificationType", "identification", "example@exam.com", "address", "phone",
-                    "cellphone", "userName", "password", true, DateTime.Now, DateTime.Now));
+                    "cellphone", "userName", "password", "status", DateTime.Now, DateTime.Now));
         }
-        
+
         [Theory]
         [InlineData("")]
         [InlineData(null)]
@@ -26,9 +26,9 @@ namespace Invoice.UnitTests.Domain.Entities
             Assert.Throws<InvoiceDomainException>(() =>
                 new User("name", "secondName", firstLastName, "secondLastName",
                     "identificationType", "identification", "example@exam.com", "address", "phone",
-                    "cellphone", "userName", "password", true, DateTime.Now, DateTime.Now));
+                    "cellphone", "userName", "password", "status", DateTime.Now, DateTime.Now));
         }
-        
+
         [Theory]
         [InlineData("")]
         [InlineData(null)]
@@ -37,9 +37,9 @@ namespace Invoice.UnitTests.Domain.Entities
             Assert.Throws<InvoiceDomainException>(() =>
                 new User("name", "secondName", "firstLastName", "secondLastName",
                     "identificationType", identification, "example@exam.com", "address", "phone",
-                    "cellphone", "userName", "password", true, DateTime.UtcNow, DateTime.UtcNow));
+                    "cellphone", "userName", "password", "status", DateTime.UtcNow, DateTime.UtcNow));
         }
-        
+
         [Theory]
         [InlineData("")]
         [InlineData(null)]
@@ -48,7 +48,7 @@ namespace Invoice.UnitTests.Domain.Entities
             Assert.Throws<InvoiceDomainException>(() =>
                 new User("name", "secondName", "firstLastName", "secondLastName",
                     "identificationType", "identification", email, "address", "phone",
-                    "cellphone", "userName", "password", true, DateTime.UtcNow, DateTime.UtcNow));
+                    "cellphone", "userName", "password", "status", DateTime.UtcNow, DateTime.UtcNow));
         }
     }
 }

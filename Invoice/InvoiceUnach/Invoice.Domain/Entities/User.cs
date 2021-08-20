@@ -21,18 +21,18 @@ namespace Invoice.Domain.Entities
         public string CellPhone { get; private set; }
         public string UserName { get; private set; }
         public string Password { get; private set; }
-        public bool Status { get; private set; }
+        public string Status { get; private set; }
         public DateTime CreateAt { get; private set; }
         public DateTime UpdateAt { get; private set; }
 
         private readonly List<UserRol> _userRols;
-        private IReadOnlyCollection<UserRol> UserRols => _userRols;
+        public IReadOnlyCollection<UserRol> UserRols => _userRols;
         
         private readonly List<Subsidiary> _subsidiaries;
-        private IReadOnlyCollection<Subsidiary> Subsidiaries => _subsidiaries;
+        public IReadOnlyCollection<Subsidiary> Subsidiaries => _subsidiaries;
         
         private readonly List<Client> _clients;
-        private IReadOnlyCollection<Client> Clients => _clients;
+        public IReadOnlyCollection<Client> Clients => _clients;
 
         protected User()
         {
@@ -44,7 +44,7 @@ namespace Invoice.Domain.Entities
 
         public User(string firstName, string secondName, string firstLastName, string secondLastName,
             string identificationType, string identification, string email, string address, string phone,
-            string cellPhone, string userName, string password, bool status, DateTime createAt,
+            string cellPhone, string userName, string password, string status, DateTime createAt,
             DateTime updateAt)
         {
             SetFirstName(firstName);
@@ -136,8 +136,10 @@ namespace Invoice.Domain.Entities
             Password = value;
         }
 
-        public void SetStatus(bool value)
+        public void SetStatus(string value)
         {
+            if (string.IsNullOrEmpty(value)) throw new InvoiceDomainException("The status is required.");
+            
             Status = value;
         }
 
