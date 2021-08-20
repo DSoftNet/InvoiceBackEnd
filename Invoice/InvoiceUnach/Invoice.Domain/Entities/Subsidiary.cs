@@ -12,8 +12,8 @@ namespace Invoice.Domain.Entities
         public string Address{ get; private set; }
         public string Phone1 { get; private set; }
         public string Phone2 { get; private set; }
-        public DateTime RegistrationDate { get; private set; }
-        public DateTime UpdateDate { get; private set; }
+        public DateTime CreateAt { get; private set; }
+        public DateTime UpdateAt { get; private set; }
 		public Guid UserId { get; private set; }
 
 
@@ -22,15 +22,14 @@ namespace Invoice.Domain.Entities
             Id = Guid.NewGuid();
         }
 
-        public Subsidiary(string name, string address, string phone1, string phone2, 
-			   DateTime registrationDate, DateTime updateDate, Guid userId )
+        public Subsidiary(string name, string address, string phone1, string phone2,Guid userId )
 		{
 			SetName(name);
             SetAddress(address);
             SetPhone1(phone1);
             SetPhone2(phone2);
-            SetRegistrationDate(registrationDate);
-            SetUpdateDate(updateDate);
+            CreateAt = DateTime.UtcNow;
+            UpdateAt = DateTime.UtcNow;
             SetUserId(userId);
         }
 
@@ -60,14 +59,7 @@ namespace Invoice.Domain.Entities
         {
             Phone2 = value;
         }
-        public void SetRegistrationDate(DateTime value)
-        {
-            RegistrationDate = value;
-        }
-        public void SetUpdateDate(DateTime value)
-        {
-            UpdateDate = value;
-        }
+        
         public void SetUserId(Guid value)
         {
             if (value == Guid.Empty) throw new InvoiceDomainException("The UserId is required.");

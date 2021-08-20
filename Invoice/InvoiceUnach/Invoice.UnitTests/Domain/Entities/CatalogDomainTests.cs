@@ -12,7 +12,7 @@ namespace Invoice.UnitTests.Domain.Entities
         public void Constructor_NameIsInvalid_ThrowInvoiceDomainException(string name)
         {
             Assert.Throws<InvoiceDomainException>(() =>
-                new Catalog(name, "code", "value", "description", true));
+                new Catalog(name, "code", "value", "description" , true));
         }
 
         [Theory]
