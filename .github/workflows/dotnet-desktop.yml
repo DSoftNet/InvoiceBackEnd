@@ -38,12 +38,7 @@
 
 name: .NET Core Desktop
 
-on:
-  push:
-    branches: [ development ]
-  pull_request:
-    branches: [ development ]
-
+on: [push]
 jobs:
 
   build:
