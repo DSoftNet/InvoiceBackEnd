@@ -1,7 +1,7 @@
 name: .NET
 
 on:
-  [pull]
+  [push]
 
 jobs:
   build:
