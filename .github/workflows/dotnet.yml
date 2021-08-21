@@ -1,8 +1,7 @@
 name: .NET
 
 on:
-  pull_request:
-    branches: [ development ]
+  [pull]
 
 jobs:
   build:
