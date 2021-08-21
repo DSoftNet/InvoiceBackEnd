@@ -51,8 +51,8 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: InvoiceUnach.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: Invoice.UnitTests\Invoice.UnitTests.csproj               # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      Solution_Name: \Invoice\InvoiceUnach\InvoiceUnach.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
+      Test_Project_Path: \Invoice\Invoice.UnitTests\Invoice.UnitTests.csproj               # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
    
     steps:
     - name: Checkout
