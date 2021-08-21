@@ -10,7 +10,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+paths:
+    include:
+      - 'Invoice/InvoiceUnach/*'
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
