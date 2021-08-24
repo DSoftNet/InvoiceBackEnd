@@ -18,12 +18,12 @@ namespace Invoice.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<Catalog>> Gets()
+        public async Task<List<Catalog>> Get()
         {
             return await _dbContext.Catalogs.ToListAsync();
         }
 
-        public async Task<Catalog> Get(Guid id)
+        public async Task<Catalog> GetById(Guid id)
         {
             return await _dbContext.Catalogs.FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -36,6 +36,11 @@ namespace Invoice.Infrastructure.Repositories
         public Catalog Update(Catalog catalog)
         {
             return _dbContext.Catalogs.Update(catalog).Entity;
+        }
+
+        public async Task<Catalog> GetByCode(string code)
+        {
+            return await _dbContext.Catalogs.FirstOrDefaultAsync(x => x.Code == code);
         }
     }
 }

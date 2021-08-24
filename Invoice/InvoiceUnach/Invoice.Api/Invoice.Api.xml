@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Invoice.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Invoice.Api.Controllers.CatalogController.Create(Invoice.Application.Commands.CreateCatalogCommand)">
+             <summary>
+             Added a catalog
+             </summary>
+             <remarks>
+             
+             Sample request
+            
+                 POST /catalog
+                 {
+                     "name":"name",
+                     "code":"code",
+                     "value":"value",
+                     "description":"description",
+                     "status": true or false,
+                 }
+             
+             </remarks>
+             <param name="command"></param>
+             <returns></returns>
+        </member>
+    </members>
+</doc>

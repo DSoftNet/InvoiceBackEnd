@@ -8,9 +8,10 @@ namespace Invoice.Domain.Interfaces.Repositories
 {
     public interface ICatalogRepository : IRepository<Catalog>
     {
-        Task<List<Catalog>> Gets();
-        Task<Catalog> Get(Guid id);
+        Task<List<Catalog>> Get();
+        Task<Catalog> GetById(Guid id);
         Catalog Add(Catalog catalog);
         Catalog Update(Catalog catalog);
+        Task<Catalog> GetByCode(string code);
     }
 }

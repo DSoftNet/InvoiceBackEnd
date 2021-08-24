@@ -1,8 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Autofac;
+using Invoice.Api.Configuration;
 using Invoice.Infrastructure;
+using Invoice.Infrastructure.JsonResolver;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,16 +36,21 @@ namespace Invoice.Api
             var appSettings = new AppSettings();
             Configuration.Bind(appSettings);
             
-            services.AddControllers();
-            
             services.AddDbContext<InvoiceDbContext>
                 (option=> 
                 option.UseSqlServer(appSettings.ConnectionStrings.InvoiceDb));
             
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Invoice.Api", Version = "v1"});
-            });
+            services.AddHttpContextAccessor();
+            
+            services.AddControllers()
+                .AddNewtonsoftJson(opt =>
+                    opt.SerializerSettings.ContractResolver = new PrivateSetterContractResolver());
+                    
+            ConfigureSwagger(services);
+            
+            services.AddMvc();
+            services.AddMemoryCache();
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +70,36 @@ namespace Invoice.Api
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+        
+        private void ConfigureSwagger(IServiceCollection services)
+        {
+            // Register the Swagger generator
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Invoice Unach API",
+                    Description = "API REST used to manage invoice Unach information",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "DSoftNet",
+                        Email = "dsoftnet@unach.edu.ec"
+                    }
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+        }
+        
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new MediatorModule());
+            builder.RegisterModule(new RepositoryModule());
         }
     }
 }
