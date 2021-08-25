@@ -18,12 +18,12 @@ namespace Invoice.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<User>> Gets()
+        public async Task<List<User>> Get()
         {
             return await _dbContext.Users.ToListAsync();
         }
 
-        public async Task<User> Get(Guid id)
+        public async Task<User> GetById(Guid id)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -37,7 +37,7 @@ namespace Invoice.Infrastructure.Repositories
         {
             return _dbContext.Users.Update(user).Entity;
         }
-
         
+
     }
 }
