@@ -22,6 +22,11 @@ namespace Invoice.Infrastructure.Repositories
         {
             return await _dbContext.ItemCatalogs.ToListAsync();
         }
+        public async Task<ItemCatalog> GetById(Guid id)
+        { 
+            return await _dbContext.ItemCatalogs.FirstOrDefaultAsync(x => x.Id == id);
+            
+        }
         public ItemCatalog Add(ItemCatalog itemCatalog)
         {
             return _dbContext.ItemCatalogs.Add(itemCatalog).Entity;
