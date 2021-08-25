@@ -42,7 +42,7 @@ namespace Invoice.Api.Controllers
         ///         "cellphone":"cellphone",
         ///         "status": true or false,
         ///         "createAt":"createAt",
-        ///         "updateAt":"updateAt",
+        ///         "updateAt":"updateAt"
         ///     }
         /// 
         /// </remarks>
