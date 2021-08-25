@@ -10,6 +10,7 @@ namespace Invoice.Domain.Interfaces.Repositories
     {
         Task<List<Client>> Gets();
         Task<Client> Get(Guid id);
+        Task<Client> Get(string email);
         Client Add(Client client);
         Client Update(Client client);
     }
