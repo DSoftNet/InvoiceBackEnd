@@ -21,13 +21,13 @@ namespace Invoice.Api.Controllers
         }
 
         /// <summary>
-        /// Added a catalog
+        /// Added a client
         /// </summary>
         /// <remarks>
         /// 
         /// Sample request
         ///
-        ///     POST /catalog
+        ///     POST /client
         ///     {
         ///         "firstName":"firstName",
         ///         "secondName":"secondName",
@@ -40,9 +40,7 @@ namespace Invoice.Api.Controllers
         ///         "address":"secondLastName",
         ///         "phone":"phone",
         ///         "cellphone":"cellphone",
-        ///         "status": true or false,
-        ///         "createAt":"createAt",
-        ///         "updateAt":"updateAt"
+        ///         "status": true or false
         ///     }
         /// 
         /// </remarks>

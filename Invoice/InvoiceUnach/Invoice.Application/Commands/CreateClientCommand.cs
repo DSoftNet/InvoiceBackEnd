@@ -16,11 +16,11 @@ namespace Invoice.Application.Commands
         public string Phone { get; private set; }
         public string CellPhone { get; private set; }
         public bool Status { get; private set; }
-        public DateTime CreateAt { get; private set; }
-        public DateTime UpdateAt { get; private set; }
         public Guid UserId { get; private set; }
-        
-        public CreateClientCommand(string firstName, string secondName, string firstLastName, string secondLastName, string identificationType, string identification, string email, string address, string phone, string cellPhone, bool status, DateTime createAt, DateTime updateAt, Guid userId)
+
+        public CreateClientCommand(string firstName, string secondName, string firstLastName, string secondLastName,
+            string identificationType, string identification, string email, string address, string phone,
+            string cellPhone, bool status, DateTime createAt, DateTime updateAt, Guid userId)
         {
             FirstName = firstName;
             SecondName = secondName;
@@ -33,10 +33,7 @@ namespace Invoice.Application.Commands
             Phone = phone;
             CellPhone = cellPhone;
             Status = status;
-            CreateAt = createAt;
-            UpdateAt = updateAt;
             UserId = userId;
         }
-
     }
 }

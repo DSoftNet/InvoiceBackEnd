@@ -27,13 +27,13 @@
         </member>
         <member name="M:Invoice.Api.Controllers.ClientController.Create(Invoice.Application.Commands.CreateClientCommand)">
              <summary>
-             Added a catalog
+             Added a client
              </summary>
              <remarks>
              
              Sample request
             
-                 POST /catalog
+                 POST /client
                  {
                      "firstName":"firstName",
                      "secondName":"secondName",
@@ -46,9 +46,7 @@
                      "address":"secondLastName",
                      "phone":"phone",
                      "cellphone":"cellphone",
-                     "status": true or false,
-                     "createAt":"createAt",
-                     "updateAt":"updateAt",
+                     "status": true or false
                  }
              
              </remarks>

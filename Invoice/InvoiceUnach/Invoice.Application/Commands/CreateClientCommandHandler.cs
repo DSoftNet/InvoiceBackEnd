@@ -1,11 +1,10 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using FluentValidation.Validators;
 using Invoice.Domain.Entities;
 using Invoice.Domain.Exceptions;
 using Invoice.Domain.Interfaces.Repositories;
+using Invoice.Domain.Services.Validates;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -17,19 +16,21 @@ namespace Invoice.Application.Commands
 
         private readonly ILogger<CreateClientCommandHandler> _logger;
         private readonly IClientRepository _clientRepository;
+        private readonly IMediator _mediator;
 
         public CreateClientCommandHandler(ILogger<CreateClientCommandHandler> logger,
-            IClientRepository clientRepository)
+            IClientRepository clientRepository, IMediator mediator)
         {
             _logger = logger;
             _clientRepository = clientRepository;
+            _mediator = mediator;
         }
 
         #endregion
 
         public async Task<bool> Handle(CreateClientCommand command, CancellationToken cancellationToken)
         {
-            await ValidateEmail(command);
+            await Validate(command, cancellationToken);
 
             var client = new Client(command.FirstName, command.SecondName, command.FirstLastName,
                 command.SecondLastName, command.IdentificationType, command.Identification, command.Email.Trim(),
@@ -39,17 +40,24 @@ namespace Invoice.Application.Commands
             await _clientRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
             return true;
-        }   
+        }
 
         #region Private Methods
+
+        private async Task Validate(CreateClientCommand command, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(new ValidateUserService(command.UserId), cancellationToken);
+            await ValidateEmail(command);
+        }
 
         private async Task ValidateEmail(CreateClientCommand command)
         {
             var client = await _clientRepository.Get(command.Email.Trim());
-            
+
             if (client != null)
             {
-                throw new InvoiceDomainException($"The email {command.Email} already exist.", HttpStatusCode.BadRequest);
+                throw new InvoiceDomainException($"The email {command.Email} already exist.",
+                    HttpStatusCode.BadRequest);
             }
         }
 

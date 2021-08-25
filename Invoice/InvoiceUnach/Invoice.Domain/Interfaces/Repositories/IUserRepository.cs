@@ -8,8 +8,8 @@ namespace Invoice.Domain.Interfaces.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<List<User>> Gets();
-        Task<User> Get(Guid id);
+        Task<List<User>> Get();
+        Task<User> GetById(Guid id);
         User Add(User user);
         User Update(User user);
     }
