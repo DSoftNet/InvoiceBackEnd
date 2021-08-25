@@ -25,5 +25,34 @@
              <param name="command"></param>
              <returns></returns>
         </member>
+        <member name="M:Invoice.Api.Controllers.UserController.Create(Invoice.Application.Commands.CreateUserCommand)">
+             <summary>
+             Added a user
+             </summary>
+             <remarks>
+             
+             Sample request
+            
+                 POST /user
+                 {            
+                     "firstName":"Juan",
+                     "secondName":"secondName",
+                     "firstLastName":"Perez",
+                     "secondLastName":"secondLastName",
+                     "identificationType":"identificationType",
+                     "identification":"identification",
+                     "email":"email",
+                     "address":"address",
+                     "phone":"phone",
+                     "cellPhone":"cellPhone",
+                     "userName":"name",
+                     "password":"name",
+                     "status":"status",
+                 }
+             
+             </remarks>
+             <param name="command"></param>
+             <returns></returns>
+        </member>
     </members>
 </doc>

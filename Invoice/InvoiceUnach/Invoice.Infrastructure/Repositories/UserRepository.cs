@@ -22,10 +22,10 @@ namespace Invoice.Infrastructure.Repositories
         {
             return await _dbContext.Users.ToListAsync();
         }
-
-        public async Task<User> Get(Guid id)
+        
+        public async Task<User> GetByIdentification(string identification)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Identification == identification);
         }
 
         public User Add(User user)
