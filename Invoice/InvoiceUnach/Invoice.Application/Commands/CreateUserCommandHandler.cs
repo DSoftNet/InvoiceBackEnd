@@ -30,8 +30,8 @@ namespace Invoice.Application.Commands
         {
             await ValidateIdentification(command);
             var user = new User(command.FirstName,command.SecondName,command.FirstLastName,command.SecondLastName,
-                command.IdentificationType,command.Identification.ToUpper().Trim(),command.Email,command.Address,command.Phone,
-                command.CellPhone,command.UserName,command.Password,command.Status,command.CreateAt,command.UpdateAt);
+                command.IdentificationType,command.Identification.Trim(),command.Email,command.Address,command.Phone,
+                command.CellPhone,command.UserName,command.Password,command.Status);
 
             _userRepository.Add(user);
             await _userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
@@ -43,11 +43,12 @@ namespace Invoice.Application.Commands
         
         private async Task ValidateIdentification(CreateUserCommand command)
         {
-            var user = await _userRepository.GetByIdentification(command.Identification.ToUpper().Trim());
+            var user = await _userRepository.GetByIdentification(command.Identification.Trim());
 
             if (user != null)
             {
-                throw new InvoiceDomainException($"The Identification {command.Identification} already exist.", HttpStatusCode.BadRequest);
+                throw new InvoiceDomainException($"The Identification {command.Identification} already exist.",
+                    HttpStatusCode.BadRequest);
             }
         }
       

@@ -18,12 +18,10 @@ namespace Invoice.Application.Commands
         public string UserName { get; private set; }
         public string Password { get; private set; }
         public string Status { get; private set; }
-        public DateTime CreateAt { get; private set; }
-        public DateTime UpdateAt { get; private set; }
         
-        public CreateUserCommand(string firstName, string secondName, string firstLastName, string secondLastName, string identificationType, 
-            string identification, string email, string address, string phone, string cellPhone, string userName, string password, string status, 
-            DateTime createAt, DateTime updateAt)
+        public CreateUserCommand(string firstName, string secondName, string firstLastName, string secondLastName,
+            string identificationType, string identification, string email, string address, string phone, 
+            string cellPhone, string userName, string password, string status)
         {
             FirstName = firstName;
             SecondName = secondName;
@@ -38,8 +36,6 @@ namespace Invoice.Application.Commands
             UserName = userName;
             Password = password;
             Status = status;
-            CreateAt = createAt;
-            UpdateAt = updateAt;
         }
     }
 }
