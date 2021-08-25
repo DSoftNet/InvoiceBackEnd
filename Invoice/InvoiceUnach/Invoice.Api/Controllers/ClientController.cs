@@ -29,11 +29,20 @@ namespace Invoice.Api.Controllers
         ///
         ///     POST /catalog
         ///     {
-        ///         "firtsname":"firtsname",
-        ///         "secondname":"secondname",
-        ///         "firtslastname":"firtslastname",
-        ///         "description":"description",
+        ///         "firstName":"firstName",
+        ///         "secondName":"secondName",
+        ///         "firstLastName":"firstLastName",
+        ///         "secondLastName":"secondLastName",
+        ///         "identificationType":"identificationType",
+        ///         "identification":"identification",
+        ///         "email":"email",
+        ///         "address":"secondLastName",
+        ///         "address":"secondLastName",
+        ///         "phone":"phone",
+        ///         "cellphone":"cellphone",
         ///         "status": true or false,
+        ///         "createAt":"createAt",
+        ///         "updateAt":"updateAt",
         ///     }
         /// 
         /// </remarks>
@@ -42,7 +51,7 @@ namespace Invoice.Api.Controllers
         [HttpPost]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.OK)]
-        public async Task<IActionResult> Create([FromBody] CreateCatalogCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateClientCommand command)
         {
             var commandResult = await _mediator.Send(command);
 
