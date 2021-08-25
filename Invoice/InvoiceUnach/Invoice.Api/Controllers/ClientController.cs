@@ -40,7 +40,7 @@ namespace Invoice.Api.Controllers
         ///         "phone":"phone",
         ///         "cellphone":"cellphone",
         ///         "status": true or false,
-        ///         "userID":"userID",
+        ///         "userID":"userID"
         ///     }
         /// 
         /// </remarks>
