@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Invoice.Domain.Entities;
-using Invoice.Domain.Interfaces.Repositories;
 using Invoice.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 
