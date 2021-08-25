@@ -37,7 +37,7 @@ namespace Invoice.Infrastructure.Repositories
         {
             return _dbContext.Users.Update(user).Entity;
         }
-
         
+
     }
 }

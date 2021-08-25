@@ -25,5 +25,35 @@
              <param name="command"></param>
              <returns></returns>
         </member>
+        <member name="M:Invoice.Api.Controllers.ClientController.Create(Invoice.Application.Commands.CreateClientCommand)">
+             <summary>
+             Added a catalog
+             </summary>
+             <remarks>
+             
+             Sample request
+            
+                 POST /catalog
+                 {
+                     "firstName":"firstName",
+                     "secondName":"secondName",
+                     "firstLastName":"firstLastName",
+                     "secondLastName":"secondLastName",
+                     "identificationType":"identificationType",
+                     "identification":"identification",
+                     "email":"email",
+                     "address":"secondLastName",
+                     "address":"secondLastName",
+                     "phone":"phone",
+                     "cellphone":"cellphone",
+                     "status": true or false,
+                     "createAt":"createAt",
+                     "updateAt":"updateAt",
+                 }
+             
+             </remarks>
+             <param name="command"></param>
+             <returns></returns>
+        </member>
     </members>
 </doc>
