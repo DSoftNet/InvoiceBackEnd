@@ -43,6 +43,7 @@ namespace Invoice.Application.Commands
         private async Task ValidateCode(CreateCatalogCommand command)
         {
            var catalog = await _catalogRepository.GetByCode(command.Code.ToUpper().Trim());
+           
 
             if (catalog != null)
             {

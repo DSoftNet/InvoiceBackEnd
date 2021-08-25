@@ -13,6 +13,7 @@ namespace Invoice.Domain.Interfaces.Repositories
         Task<ItemCatalog> GetByCode(string code);
         ItemCatalog Add(ItemCatalog itemCatalog);
         ItemCatalog Update(ItemCatalog itemCatalog);
+        Task<ItemCatalog> GetByCodeCatalog(string codeCatalog);
 
         
     }

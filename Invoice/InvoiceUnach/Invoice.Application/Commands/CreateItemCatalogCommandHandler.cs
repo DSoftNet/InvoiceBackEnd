@@ -29,7 +29,7 @@ namespace Invoice.Application.Commands
                    await ValidateCode(command);
                    
                    var itemCatalog = new ItemCatalog(command.Name, command.Code.ToUpper().Trim(), command.Value, 
-                       command.Description, command.Status, command.CodeCatalg);
+                       command.Description, command.Status, command.CodeCatalog);
        
                    _itemCatalogRepository.Add(itemCatalog);
                    await _itemCatalogRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
@@ -39,13 +39,14 @@ namespace Invoice.Application.Commands
        #region Private Methods
 
        private async Task ValidateCode(CreateItemCatalogCommand command)
-       {
+       { 
            var itemCatalog = await _itemCatalogRepository.GetByCode(command.Code.ToUpper().Trim());
-
+          
            if (itemCatalog != null)
            {
-             throw new InvoiceDomainException($"The code {command.Code} already exist.", HttpStatusCode.BadRequest);
+               throw new InvoiceDomainException($"The code {command.Code} already exist.", HttpStatusCode.BadRequest);
            }
+          
        }
 
        #endregion

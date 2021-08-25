@@ -36,10 +36,15 @@ namespace Invoice.Infrastructure.Repositories
         {
             return _dbContext.ItemCatalogs.Update(itemCatalog).Entity;
         }
+        public async Task<ItemCatalog> GetByCodeCatalog(string codeCatalog)
+        {
+            return await _dbContext.ItemCatalogs.FirstOrDefaultAsync(x => x.CodeCatalog == codeCatalog);
+        }
 
         public async Task<ItemCatalog> GetByCode(string code)
         {
             return await _dbContext.ItemCatalogs.FirstOrDefaultAsync(x => x.Code == code);
         }
+        
     }
 }
