@@ -20,6 +20,10 @@ namespace Invoice.Api.Configuration
             builder.RegisterType<UserRepository>()
                 .As<IUserRepository>()
                 .InstancePerLifetimeScope();
+            
+            builder.RegisterType<ProductRepository>()
+                .As<IProductRepository>()
+                .InstancePerLifetimeScope();
         }
     }
 }
