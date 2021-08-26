@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Invoice.Domain.Services.Validates
+namespace Invoice.Domain.Services.Validations
 {
     public class ValidateUserService : IRequest<bool>
     {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Invoice.Domain.Entities;
 using Invoice.Domain.Exceptions;
 using Invoice.Domain.Interfaces.Repositories;
-using Invoice.Domain.Services.Validates;
+using Invoice.Domain.Services.Validations;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

@@ -3,7 +3,7 @@ using Autofac;
 using FluentValidation;
 using Invoice.Application.Commands;
 using Invoice.Application.Validations;
-using Invoice.Domain.Services.Validates;
+using Invoice.Domain.Services.Validations;
 using Invoice.Infrastructure.Behavior;
 using MediatR;
 using Module = Autofac.Module;

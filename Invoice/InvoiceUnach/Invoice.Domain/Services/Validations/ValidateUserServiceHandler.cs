@@ -6,7 +6,7 @@ using Invoice.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Invoice.Domain.Services.Validates
+namespace Invoice.Domain.Services.Validations
 {
     public class ValidateUserServiceHandler : IRequestHandler<ValidateUserService, bool>
     {

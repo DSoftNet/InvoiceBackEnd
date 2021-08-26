@@ -42,13 +42,13 @@ namespace Invoice.Application.Commands
 
         private async Task ValidateCode(CreateCatalogCommand command)
         {
-           var catalog = await _catalogRepository.GetByCode(command.Code.ToUpper().Trim());
-           
-
+            var catalog = await _catalogRepository.GetByCode(command.Code.ToUpper().Trim());
+            
             if (catalog != null)
             {
-               throw new InvoiceDomainException($"The code {command.Code} already exist.", HttpStatusCode.BadRequest);
-             }
+                throw new InvoiceDomainException($"The code {command.Code} already exist.", 
+                    HttpStatusCode.BadRequest);
+            }
         }
 
         #endregion
