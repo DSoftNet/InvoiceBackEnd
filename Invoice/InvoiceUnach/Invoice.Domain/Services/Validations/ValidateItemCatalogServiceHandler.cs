@@ -25,11 +25,11 @@ namespace Invoice.Domain.Services.Validations
 
         public async Task<bool> Handle(ValidateItemCatalogService service, CancellationToken cancellationToken)
         {
-            var catalog = await _itemCatalogRepository.GetById(service.Id);
+            var catalog = await _itemCatalogRepository.GetById(service.Code);
 
             if (catalog == null)
             {
-                throw new InvoiceDomainException($"The item catalog id {service.Id} doesn't exist.",
+                throw new InvoiceDomainException($"The item catalog id {service.Code} doesn't exist.",
                     HttpStatusCode.BadRequest);
             }
 
