@@ -25,5 +25,62 @@
              <param name="command"></param>
              <returns></returns>
         </member>
+        <member name="M:Invoice.Api.Controllers.ClientController.Create(Invoice.Application.Commands.CreateClientCommand)">
+             <summary>
+             Added a client
+             </summary>
+             <remarks>
+             
+             Sample request
+            
+                 POST /client
+                 {
+                     "firstName":"firstName",
+                     "secondName":"secondName",
+                     "firstLastName":"firstLastName",
+                     "secondLastName":"secondLastName",
+                     "identificationType":"identificationType",
+                     "identification":"identification",
+                     "email":"email",
+                     "address":"secondLastName",
+                     "address":"secondLastName",
+                     "phone":"phone",
+                     "cellphone":"cellphone",
+                     "status": true or false
+                 }
+             
+             </remarks>
+             <param name="command"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Invoice.Api.Controllers.UserController.Create(Invoice.Application.Commands.CreateUserCommand)">
+             <summary>
+             Added a user
+             </summary>
+             <remarks>
+             
+             Sample request
+            
+                 POST /user
+                 {            
+                     "firstName":"Juan",
+                     "secondName":"secondName",
+                     "firstLastName":"Perez",
+                     "secondLastName":"secondLastName",
+                     "identificationType":"identificationType",
+                     "identification":"identification",
+                     "email":"email",
+                     "address":"address",
+                     "phone":"phone",
+                     "cellPhone":"cellPhone",
+                     "userName":"name",
+                     "password":"name",
+                     "status":"status",
+                 }
+             
+             </remarks>
+             <param name="command"></param>
+             <returns></returns>
+        </member>
     </members>
 </doc>

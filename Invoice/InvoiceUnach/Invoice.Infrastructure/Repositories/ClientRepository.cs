@@ -27,6 +27,10 @@ namespace Invoice.Infrastructure.Repositories
         {
             return await _dbContext.Clients.FirstOrDefaultAsync(x => x.Id == id);
         }
+        public async Task<Client> Get(string email)
+        {
+            return await _dbContext.Clients.FirstOrDefaultAsync(x => x.Email== email);
+        }
 
         public Client Add(Client client)
         {

@@ -15,7 +15,15 @@ namespace Invoice.Api.Configuration
                 
             builder.RegisterType<ItemCatalogRepository>()
                 .As<IItemCatalogRepository>()
+
+            builder.RegisterType<ClientRepository>()
+                .As<IClientRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<UserRepository>()
+                .As<IUserRepository>()
                 .InstancePerLifetimeScope();
         }
+ 
     }
 }
