@@ -36,11 +36,11 @@ namespace Invoice.Api.Controllers
         ///         "identificationType":"identificationType",
         ///         "identification":"identification",
         ///         "email":"email",
-        ///         "address":"secondLastName",
-        ///         "address":"secondLastName",
+        ///         "address":"address",
         ///         "phone":"phone",
         ///         "cellphone":"cellphone",
-        ///         "status": true or false
+        ///         "status": true or false,
+        ///         "userID":"userID"
         ///     }
         /// 
         /// </remarks>
