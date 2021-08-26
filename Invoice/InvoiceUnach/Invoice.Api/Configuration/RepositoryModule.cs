@@ -23,6 +23,10 @@ namespace Invoice.Api.Configuration
             builder.RegisterType<UserRepository>()
                 .As<IUserRepository>()
                 .InstancePerLifetimeScope();
+            
+            builder.RegisterType<SubsidiaryRepository>()
+                .As<ISubsidiaryRepository>()
+                .InstancePerLifetimeScope();
         }
  
     }
