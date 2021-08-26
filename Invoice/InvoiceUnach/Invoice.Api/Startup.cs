@@ -8,6 +8,7 @@ using Autofac;
 using Invoice.Api.Configuration;
 using Invoice.Infrastructure;
 using Invoice.Infrastructure.JsonResolver;
+using Invoice.Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -66,8 +67,9 @@ namespace Invoice.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
             app.UseAuthorization();
+            
+            ConfigureMiddlewares(app);
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
@@ -95,7 +97,13 @@ namespace Invoice.Api
                 c.IncludeXmlComments(xmlPath);
             });
         }
-        
+
+        protected virtual void ConfigureMiddlewares(IApplicationBuilder app)
+        {
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
+        }
+
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new MediatorModule());
