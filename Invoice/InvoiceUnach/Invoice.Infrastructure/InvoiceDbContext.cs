@@ -29,6 +29,7 @@ namespace Invoice.Infrastructure
         public DbSet<UserRol> UsersRol { get; set; }
         public DbSet<Catalog> Catalogs { get; set; }
         public DbSet<ItemCatalog> ItemCatalogs { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
         {
@@ -44,6 +45,7 @@ namespace Invoice.Infrastructure
             modelBuilder.ApplyConfiguration(new UserRolEFConfig());
             modelBuilder.ApplyConfiguration(new CatalogEFConfig());
             modelBuilder.ApplyConfiguration(new ItemCatalogEFConfig());
+            modelBuilder.ApplyConfiguration(new ProductEFConfig());
         }
     }
 }
