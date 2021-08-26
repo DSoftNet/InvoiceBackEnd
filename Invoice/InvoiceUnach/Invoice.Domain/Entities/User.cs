@@ -49,8 +49,7 @@ namespace Invoice.Domain.Entities
 
         public User(string firstName, string secondName, string firstLastName, string secondLastName,
             string identificationType, string identification, string email, string address, string phone,
-            string cellPhone, string userName, string password, string status, DateTime createAt,
-            DateTime updateAt)
+            string cellPhone, string userName, string password, string status)
         {
             SetFirstName(firstName);
             SetSecondName(secondName);

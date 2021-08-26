@@ -42,11 +42,40 @@
                      "identificationType":"identificationType",
                      "identification":"identification",
                      "email":"email",
-                     "address":"secondLastName",
-                     "address":"secondLastName",
+                     "address":"address",
                      "phone":"phone",
                      "cellphone":"cellphone",
-                     "status": true or false
+                     "status": true or false,
+                     "userID":"userID",
+                 }
+             
+             </remarks>
+             <param name="command"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Invoice.Api.Controllers.UserController.Create(Invoice.Application.Commands.CreateUserCommand)">
+             <summary>
+             Added a user
+             </summary>
+             <remarks>
+             
+             Sample request
+            
+                 POST /user
+                 {            
+                     "firstName":"Juan",
+                     "secondName":"secondName",
+                     "firstLastName":"Perez",
+                     "secondLastName":"secondLastName",
+                     "identificationType":"identificationType",
+                     "identification":"identification",
+                     "email":"email",
+                     "address":"address",
+                     "phone":"phone",
+                     "cellPhone":"cellPhone",
+                     "userName":"name",
+                     "password":"name",
+                     "status":"status",
                  }
              
              </remarks>

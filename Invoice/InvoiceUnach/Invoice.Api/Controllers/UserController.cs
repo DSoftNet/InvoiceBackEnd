@@ -8,48 +8,50 @@ using Microsoft.Extensions.Logging;
 namespace Invoice.Api.Controllers
 {
     [ApiController]
-    [Route("client")]
-    public class ClientController : ControllerBase
+    [Route("user")]
+    public class UserController: ControllerBase
     {
-        private readonly ILogger<ClientController> _logger;
+        private readonly ILogger<UserController> _logger;
         private readonly IMediator _mediator;
 
-        public ClientController(ILogger<ClientController> logger, IMediator mediator)
+        public UserController(ILogger<UserController> logger, IMediator mediator)
         {
             _logger = logger;
             _mediator = mediator;
         }
-
+        
         /// <summary>
-        /// Added a client
+        /// Added a user
         /// </summary>
         /// <remarks>
         /// 
         /// Sample request
         ///
-        ///     POST /client
-        ///     {
-        ///         "firstName":"firstName",
+        ///     POST /user
+        ///     {            
+        ///         "firstName":"Juan",
         ///         "secondName":"secondName",
-        ///         "firstLastName":"firstLastName",
+        ///         "firstLastName":"Perez",
         ///         "secondLastName":"secondLastName",
         ///         "identificationType":"identificationType",
         ///         "identification":"identification",
         ///         "email":"email",
         ///         "address":"address",
         ///         "phone":"phone",
-        ///         "cellphone":"cellphone",
-        ///         "status": true or false,
-        ///         "userID":"userID"
+        ///         "cellPhone":"cellPhone",
+        ///         "userName":"name",
+        ///         "password":"name",
+        ///         "status":"status",
         ///     }
         /// 
         /// </remarks>
         /// <param name="command"></param>
         /// <returns></returns>
+        
         [HttpPost]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.OK)]
-        public async Task<IActionResult> Create([FromBody] CreateClientCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
         {
             var commandResult = await _mediator.Send(command);
 
@@ -60,5 +62,7 @@ namespace Invoice.Api.Controllers
 
             return Ok(true);
         }
+       
+        
     }
 }

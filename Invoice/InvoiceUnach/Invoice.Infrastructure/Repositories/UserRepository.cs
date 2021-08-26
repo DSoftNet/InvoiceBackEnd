@@ -23,6 +23,11 @@ namespace Invoice.Infrastructure.Repositories
             return await _dbContext.Users.ToListAsync();
         }
 
+        public async Task<User> GetByIdentification(string identification)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Identification == identification);
+        }
+
         public async Task<User> GetById(Guid id)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);

@@ -8,10 +8,13 @@ namespace Invoice.Domain.Interfaces.Repositories
 {
     public interface IItemCatalogRepository : IRepository<ItemCatalog>
     {
-        Task<List<ItemCatalog>> Gets();
-        Task<ItemCatalog> Get(string code);
+       Task<List<ItemCatalog>> Get();
+       Task<ItemCatalog> GetById(Guid id);
+        Task<ItemCatalog> GetByCode(string code);
         ItemCatalog Add(ItemCatalog itemCatalog);
         ItemCatalog Update(ItemCatalog itemCatalog);
+        Task<ItemCatalog> GetByCodeCatalog(string codeCatalog);
+
         
     }
 }
