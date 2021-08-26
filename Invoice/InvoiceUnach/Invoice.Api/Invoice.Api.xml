@@ -82,30 +82,5 @@
              <param name="command"></param>
              <returns></returns>
         </member>
-        <member name="M:Invoice.Api.Controllers.ProductController.Create(Invoice.Application.Commands.CreateProductCommand)">
-            <summary>
-                Added a product
-            </summary>
-            <remarks>
-
-                Sample request
-
-                POST /product
-                {
-                    "name"="name";
-                    "description"="description";
-                    "code"="code";
-                    "price"=price;
-                    "isIva"=true or false;
-                    "stock"=stock;
-                    "isExpiration"=true or false;
-                    "expirationAt"="expirationAt";
-                    "status"=true or false;
-                }
-
-            </remarks>
-            <param name="command"></param>
-            <returns></returns>
-        </member>
     </members>
 </doc>
