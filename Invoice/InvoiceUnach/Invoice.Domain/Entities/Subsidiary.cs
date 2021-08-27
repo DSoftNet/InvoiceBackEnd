@@ -22,7 +22,7 @@ namespace Invoice.Domain.Entities
             Id = Guid.NewGuid();
         }
 
-        public Subsidiary(string name, string address, string phone1, string phone2,Guid userId )
+        public Subsidiary(string name, string address, string phone1, string phone2, Guid userId )
 		{
 			SetName(name);
             SetAddress(address);

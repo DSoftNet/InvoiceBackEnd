@@ -19,17 +19,20 @@ namespace Invoice.Application.Commands
         private readonly IMediator _mediator;
 
         public CreateSubsidiaryCommandHandler(ILogger<CreateSubsidiaryCommandHandler> logger,
-            ISubsidiaryRepository subsidiaryRepository)
+            ISubsidiaryRepository subsidiaryRepository, IMediator mediator)
         {
             _logger = logger;
             _subsidiaryRepository = subsidiaryRepository;
+            _mediator = mediator;
         }
 
         #endregion
 
         public async Task<bool> Handle(CreateSubsidiaryCommand command, CancellationToken cancellationToken)
         {
-            var subsidiary = new Subsidiary(command.Name, command.Address.ToUpper().Trim(), command.Phone1, 
+            await Validate(command, cancellationToken);
+            
+            var subsidiary = new Subsidiary(command.Name, command.Address, command.Phone1,
                 command.Phone2, command.UserId);
 
             _subsidiaryRepository.Add(subsidiary);
@@ -37,15 +40,14 @@ namespace Invoice.Application.Commands
 
             return true;
         }
-        
+
         #region Private Methods
-        
+
         private async Task Validate(CreateSubsidiaryCommand command, CancellationToken cancellationToken)
         {
             await _mediator.Send(new ValidateUserService(command.UserId), cancellationToken);
         }
 
-        
         #endregion
     }
 }

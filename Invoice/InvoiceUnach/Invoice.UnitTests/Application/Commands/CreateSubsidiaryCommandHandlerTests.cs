@@ -6,6 +6,8 @@ using Invoice.Domain.Entities;
 using Invoice.Domain.Exceptions;
 using Invoice.Domain.Interfaces.Repositories;
 using Invoice.Domain.SeedWork;
+using Invoice.Domain.Services.Validations;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
@@ -16,6 +18,7 @@ namespace Invoice.UnitTests.Application.Commands
     {
         private readonly Mock<ILogger<CreateSubsidiaryCommandHandler>> _logger;
         private readonly Mock<ISubsidiaryRepository> _subsidiaryRepository;
+        private readonly Mock<IMediator> _mediator;
         private readonly Mock<IUnitOfWork> _dbContext;
 
         private readonly CreateSubsidiaryCommandHandler _handler;
@@ -24,11 +27,13 @@ namespace Invoice.UnitTests.Application.Commands
         {
             _logger = new Mock<ILogger<CreateSubsidiaryCommandHandler>>();
             _subsidiaryRepository = new Mock<ISubsidiaryRepository>();
+            _mediator = new Mock<IMediator>();
             _dbContext = new Mock<IUnitOfWork>();
-            _subsidiaryRepository.Setup(expression:x => x.UnitOfWork)
+            
+            _subsidiaryRepository.Setup(x => x.UnitOfWork)
                 .Returns(_dbContext.Object);
 
-            _handler = new CreateSubsidiaryCommandHandler(_logger.Object, _subsidiaryRepository.Object);
+            _handler = new CreateSubsidiaryCommandHandler(_logger.Object, _subsidiaryRepository.Object, _mediator.Object);
         }
         
         [Fact]
@@ -37,8 +42,6 @@ namespace Invoice.UnitTests.Application.Commands
             var command = new CreateSubsidiaryCommand("name", "address", "description",
                 "value", Guid.Parse("5C60F693-BEF5-E011-A485-80EE7300C695"));
 
-            _subsidiaryRepository.Setup(x => x.GetByCode(It.IsAny<string>()))
-                .ReturnsAsync(null as Subsidiary);
 
             //Act
             bool actual = await _handler.Handle(command, default);
@@ -86,9 +89,6 @@ namespace Invoice.UnitTests.Application.Commands
             var command = new CreateSubsidiaryCommand("name", "address", "description",
                 "value", Guid.Parse("5C60F693-BEF5-E011-A485-80EE7300C695"));
 
-            _subsidiaryRepository.Setup(x => x.GetByCode(It.IsAny<string>()))
-                .ReturnsAsync(null as Subsidiary);
-
             //Act
             bool actual = await _handler.Handle(command, default);
 
@@ -99,12 +99,12 @@ namespace Invoice.UnitTests.Application.Commands
         [Fact]
         public async Task Handle_UserIdIsNotExist_AddCalled()
         {
-            var command = new CreateSubsidiaryCommand("name", "address", "description",
-                "value", Guid.Parse("5C60F693-BEF5-E011-A485-80EE7300C695"));
+            var command = new CreateSubsidiaryCommand("name", "address", "0987784626",
+                "0987784626", Guid.NewGuid());
 
             //Act
-            bool actual = await _handler.Handle(command, default);
-
+            await _handler.Handle(command, default);
+                
             //Assert
             _subsidiaryRepository.Verify(x => x.Add(
                 It.Is<Subsidiary>(
