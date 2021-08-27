@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Invoice.Application.Commands
 {
-    public abstract class CreateSubsidiaryCommand : IRequest<bool>
+    public class CreateSubsidiaryCommand : IRequest<bool>
     {
         public string Name { get; private set; }
         public string Address { get; private set; }

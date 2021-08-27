@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Invoice.Domain.Entities;
 using Invoice.Domain.Exceptions;
 using Invoice.Domain.Interfaces.Repositories;
+using Invoice.Domain.Services.Validations;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -13,10 +14,11 @@ namespace Invoice.Application.Commands
     {
         #region Propierties & Constructor
 
-        private readonly ILogger<CreateSubsidiaryCommand> _logger;
+        private readonly ILogger<CreateSubsidiaryCommandHandler> _logger;
         private readonly ISubsidiaryRepository _subsidiaryRepository;
+        private readonly IMediator _mediator;
 
-        public CreateSubsidiaryCommandHandler(ILogger<CreateSubsidiaryCommand> logger,
+        public CreateSubsidiaryCommandHandler(ILogger<CreateSubsidiaryCommandHandler> logger,
             ISubsidiaryRepository subsidiaryRepository)
         {
             _logger = logger;
@@ -29,7 +31,7 @@ namespace Invoice.Application.Commands
         {
             await ValidateCode(command);
 
-            var subsidiary = new Subsidiary(command.Name, command.Address.ToUpper().Trim(), command.Phone1, 
+            var subsidiary = new Subsidiary(command.Name, command.Address, command.Phone1, 
                 command.Phone2, command.UserId);
 
             _subsidiaryRepository.Add(subsidiary);
@@ -37,21 +39,24 @@ namespace Invoice.Application.Commands
 
             return true;
         }
-
+        
         #region Private Methods
+        
+        private async Task Validate(CreateSubsidiaryCommand command, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(new ValidateUserService(command.UserId), cancellationToken);
+        }
 
         private async Task ValidateCode(CreateSubsidiaryCommand command)
         {
-            var subsidiary = await _subsidiaryRepository.GetByCode(command.Address.ToUpper().Trim());
+            var subsidiary = await _subsidiaryRepository.GetByCode(command.Address);
 
             if (subsidiary != null)
             {
                 throw new InvoiceDomainException(message: $"The address {command.Address} already exist",
                     HttpStatusCode.Accepted);
-
             }
         }
-        
         #endregion
     }
 }
