@@ -47,6 +47,7 @@ namespace Invoice.Application.Commands
         private async Task Validate(CreateClientCommand command, CancellationToken cancellationToken)
         {
             await _mediator.Send(new ValidateUserService(command.UserId), cancellationToken);
+            await _mediator.Send(new ValidateItemCatalogService(command.IdentificationType), cancellationToken);
             await ValidateEmail(command);
         }
 
