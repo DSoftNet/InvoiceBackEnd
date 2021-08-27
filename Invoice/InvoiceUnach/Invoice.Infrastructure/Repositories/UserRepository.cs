@@ -20,7 +20,7 @@ namespace Invoice.Infrastructure.Repositories
 
         public async Task<List<User>> Get()
         {
-            return await _dbContext.Users.ToListAsync();
+            return await _dbContext.Users.Include(x=>x.Clients).ToListAsync();
         }
 
         public async Task<User> GetByIdentification(string identification)
