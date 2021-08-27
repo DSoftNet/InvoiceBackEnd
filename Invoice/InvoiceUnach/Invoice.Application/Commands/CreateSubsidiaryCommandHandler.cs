@@ -29,9 +29,7 @@ namespace Invoice.Application.Commands
 
         public async Task<bool> Handle(CreateSubsidiaryCommand command, CancellationToken cancellationToken)
         {
-            await ValidateCode(command);
-
-            var subsidiary = new Subsidiary(command.Name, command.Address, command.Phone1, 
+            var subsidiary = new Subsidiary(command.Name, command.Address.ToUpper().Trim(), command.Phone1, 
                 command.Phone2, command.UserId);
 
             _subsidiaryRepository.Add(subsidiary);
@@ -47,16 +45,7 @@ namespace Invoice.Application.Commands
             await _mediator.Send(new ValidateUserService(command.UserId), cancellationToken);
         }
 
-        private async Task ValidateCode(CreateSubsidiaryCommand command)
-        {
-            var subsidiary = await _subsidiaryRepository.GetByCode(command.Address);
-
-            if (subsidiary != null)
-            {
-                throw new InvoiceDomainException(message: $"The address {command.Address} already exist",
-                    HttpStatusCode.Accepted);
-            }
-        }
+        
         #endregion
     }
 }

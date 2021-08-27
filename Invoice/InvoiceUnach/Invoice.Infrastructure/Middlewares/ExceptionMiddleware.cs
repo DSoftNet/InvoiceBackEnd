@@ -30,7 +30,6 @@ namespace Invoice.Infrastructure.Middlewares
             }
             catch (Exception ex)
             {
-
                 await HandleExceptionAsync(httpContext, ex);
             }
         }

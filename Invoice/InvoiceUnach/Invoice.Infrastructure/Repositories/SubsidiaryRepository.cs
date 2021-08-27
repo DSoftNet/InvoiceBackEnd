@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Invoice.Domain.Entities;
+using Invoice.Domain.Interfaces.Repositories;
 using Invoice.Domain.SeedWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Invoice.Infrastructure.Repositories
 {
-    public class SubsidiaryRepository
+    public class SubsidiaryRepository : ISubsidiaryRepository
     {
         public IUnitOfWork UnitOfWork => _dbContext;
         private readonly InvoiceDbContext _dbContext;
@@ -17,12 +18,12 @@ namespace Invoice.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<Subsidiary>> Gets()
+        public async Task<List<Subsidiary>> Get()
         {
             return await _dbContext.Subsidiaries.ToListAsync();
         }
 
-        public async Task<Subsidiary> Get(Guid id)
+        public async Task<Subsidiary> GetById(Guid id)
         {
             return await _dbContext.Subsidiaries.FirstOrDefaultAsync(x => x.Id == id);
         }
