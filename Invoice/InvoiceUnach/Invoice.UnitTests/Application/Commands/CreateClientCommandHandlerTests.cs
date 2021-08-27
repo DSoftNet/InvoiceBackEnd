@@ -30,11 +30,11 @@ namespace Invoice.UnitTests.Application.Commands
             _dbContext = new Mock<IUnitOfWork>();
             _clientRepository.Setup(x => x.UnitOfWork)
                 .Returns(_dbContext.Object);
-            var _mediador = new Mock<IMediator>();
-            _mediador.Setup(x => x.Send(new ValidateUserService(It.IsAny<Guid>()),
+            var _mediator = new Mock<IMediator>();
+            _mediator.Setup(x => x.Send(new ValidateUserService(It.IsAny<Guid>()),
                 default)).ReturnsAsync(true);
             
-            _handler = new CreateClientCommandHandler(_logger.Object, _clientRepository.Object,_mediador.Object);
+            _handler = new CreateClientCommandHandler(_logger.Object, _clientRepository.Object,_mediator.Object);
         }
     
         [Fact]
