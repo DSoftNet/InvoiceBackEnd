@@ -19,10 +19,11 @@ namespace Invoice.UnitTests.Application.Commands
         private readonly Mock<ILogger<CreateClientCommandHandler>> _logger;
         private readonly Mock<ICatalogRepository> _catalogRepository;
         private readonly Mock<IUnitOfWork> _dbContext;
+        private readonly Mock<IMediator> _mediador;
         
         private readonly CreateClientCommandHandler _handler;
         private readonly Mock<IClientRepository> _clientRepository;
-      
+
         public CreateClientCommandHandlerTests()
         {
             _logger = new Mock<ILogger<CreateClientCommandHandler>>();
