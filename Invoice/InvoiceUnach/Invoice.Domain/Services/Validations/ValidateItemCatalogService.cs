@@ -5,9 +5,9 @@ namespace Invoice.Domain.Services.Validations
 {
     public class ValidateItemCatalogService : IRequest<bool>
     {
-        public Guid Code{ get; private set; }
+        public string Code { get; private set; }
 
-        public ValidateItemCatalogService(Guid code)
+        public ValidateItemCatalogService(string code)
         {
             Code = code;
         }
