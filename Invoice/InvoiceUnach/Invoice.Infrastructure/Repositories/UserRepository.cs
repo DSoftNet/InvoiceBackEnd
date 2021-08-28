@@ -25,9 +25,16 @@ namespace Invoice.Infrastructure.Repositories
 
         public async Task<User> GetByIdentification(string identification)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Identification == identification);
+           
+            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Identification == identification );
         }
-
+        
+        public async Task<User> GetByIdentificationOrId(string identification,Guid? id)
+        {
+           
+            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Identification == identification|| x.Id == id);
+        }
+        
         public async Task<User> GetById(Guid id)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
@@ -42,7 +49,6 @@ namespace Invoice.Infrastructure.Repositories
         {
             return _dbContext.Users.Update(user).Entity;
         }
-        
-
+            
     }
 }
