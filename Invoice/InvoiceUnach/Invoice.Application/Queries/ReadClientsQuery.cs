@@ -5,9 +5,8 @@ using MediatR;
 
 namespace Invoice.Application.Queries
 {
-    public class ReadClientsQuery : IRequest<ClientResponse>, IRequest<List<ClientResponse>>
+    public class ReadClientsQuery : IRequest<List<ClientResponse>>
     {
-        
         public Guid UserId{ get; private set; }
 
         public ReadClientsQuery(Guid userId)

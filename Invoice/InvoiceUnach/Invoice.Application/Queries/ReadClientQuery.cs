@@ -15,6 +15,6 @@ namespace Invoice.Application.Queries
             IdClient = idclient;
             UserId = userId;
         }
-        
+
     }
 }

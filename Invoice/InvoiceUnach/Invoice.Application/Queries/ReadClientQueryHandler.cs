@@ -21,7 +21,7 @@ namespace Invoice.Application.Queries
             _clientRepository = clientRepository;
             _mediator = mediator;
         }
-
+        
         public async Task<ClientResponse> Handle(ReadClientQuery query, CancellationToken cancellationToken)
         {
             await _mediator.Send(new ValidateUserService(query.UserId), cancellationToken);

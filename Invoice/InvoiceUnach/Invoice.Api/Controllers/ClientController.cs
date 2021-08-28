@@ -66,7 +66,7 @@ namespace Invoice.Api.Controllers
         }
         
         /// <summary>
-        /// Get clients
+        /// Get client
         /// </summary>
         /// <remarks>
         /// 
@@ -82,7 +82,7 @@ namespace Invoice.Api.Controllers
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [Produces(typeof(ClientResponse))]
         [Route("{idClient}/{userId}")]
-        public async Task<IActionResult> GetByCode(Guid idClient,Guid userId)
+        public async Task<IActionResult> Get(Guid idClient,Guid userId)
         {
             var queryResult = await _mediator.Send(new ReadClientQuery(idClient,userId));
 
@@ -105,11 +105,12 @@ namespace Invoice.Api.Controllers
         [ProducesResponseType((int) HttpStatusCode.OK)]
         [Produces(typeof(List<ClientResponse>))]
         [Route("{userId}")]
-        public async Task<IActionResult> GetByCode(Guid userId)
+        public async Task<IActionResult> Get(Guid userId)
         {
             var queryResult = await _mediator.Send(new ReadClientsQuery(userId));
 
             return Ok(queryResult);
         }
+        
     }
 }
