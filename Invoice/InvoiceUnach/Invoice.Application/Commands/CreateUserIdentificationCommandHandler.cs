@@ -24,19 +24,12 @@ namespace Invoice.Application.Commands
         
         public async Task<UserResponse> Handle(CreateUserIdentificationCommand command, CancellationToken cancellationToken)
         {
-
-            
             var user = await _userRepository.GetByIdentificationOrId(command.Identification,command.Id);
             return new UserResponse(user.Id,user.FirstName,user.SecondName,user.FirstLastName,user.SecondLastName,
                 user.IdentificationType,user.Identification,user.Email,user.Address,user.Phone,user.CellPhone,
                 user.UserName, user.Status);
             
         }
-        
-        
-        
-        
-        
-     
+
     }
 }

@@ -15,8 +15,5 @@ namespace Invoice.Application.Commands
             Id = id;
             Identification = identification;
         }
-
-        
-       
     }
 }

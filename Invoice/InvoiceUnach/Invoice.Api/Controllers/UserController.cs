@@ -111,7 +111,6 @@ namespace Invoice.Api.Controllers
             return Ok(queryResult);
         }
         
-        
         /// <summary>
         /// Post a user
         /// </summary>
@@ -127,18 +126,16 @@ namespace Invoice.Api.Controllers
         ///     }
         /// 
         /// </remarks>
-        /// <param name="codee"></param>
+        /// <param name="code"></param>
         /// <returns></returns>
-        
         [HttpPost]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.OK)]
-        public async Task<IActionResult> Create([FromBody] CreateUserIdentificationCommand codee)
+        public async Task<IActionResult> Create([FromBody] CreateUserIdentificationCommand code)
         {
-            var commandResult = await _mediator.Send(codee);
+            var commandResult = await _mediator.Send(code);
             return Ok(commandResult);
         }
-        
-        
+
     }
 }
