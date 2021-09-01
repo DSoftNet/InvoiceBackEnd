@@ -69,13 +69,14 @@ namespace Invoice.Api.Controllers
         /// 
         /// </remarks>
         /// <param name="idSubsidiary"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType((int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [Produces(typeof(SubsidiaryResponse))]
         [Route("{idSubsidiary}/{userId}")]
-        public async Task<IActionResult> Get(Guid idSubsidiary,Guid userId)
+        public async Task<IActionResult> GetById(Guid idSubsidiary, Guid userId)
         {
             var queryResult = await _mediator.Send(new ReadSubsidiaryQuery(idSubsidiary,userId));
 

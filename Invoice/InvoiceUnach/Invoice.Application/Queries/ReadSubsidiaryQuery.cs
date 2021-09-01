@@ -6,12 +6,12 @@ namespace Invoice.Application.Queries
 {
     public class ReadSubsidiaryQuery : IRequest<SubsidiaryResponse>
     {
-        public Guid IdSubsidiary { get; private set; }
+        public Guid SubsidiaryId { get; private set; }
         public Guid UserId { get; private set; }
 
-        public ReadSubsidiaryQuery(Guid idSubsidiary, Guid userId)
+        public ReadSubsidiaryQuery(Guid subsidiaryId, Guid userId)
         {
-            IdSubsidiary = idSubsidiary;
+            SubsidiaryId = subsidiaryId;
             UserId = userId;
         }
     }

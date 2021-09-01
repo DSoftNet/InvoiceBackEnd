@@ -29,7 +29,7 @@ namespace Invoice.Application.Queries
         {
             await _mediator.Send(new ValidateUserService(query.UserId), cancellationToken);
 
-            var subsidiaries = await _subsidiaryRepository.Get();
+            var subsidiaries = await _subsidiaryRepository.Get(query.UserId);
 
             return subsidiaries.Select(x => new SubsidiaryResponse(x.Id, x.Name, x.Address, x.Phone1, 
                     x.Phone2, x.UserId)).ToList();

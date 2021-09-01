@@ -26,7 +26,7 @@ namespace Invoice.Application.Queries
         {
             await _mediator.Send(new ValidateUserService(query.UserId), cancellationToken);
             
-            var client = await _clientRepository.Get(query.IdClient);
+            var client = await _clientRepository.GetByIdAndUserId(query.IdClient, query.UserId);
 
             return new ClientResponse(client.Id, client.FirstName, client.SecondName, client.FirstLastName, 
                 client.SecondLastName, client.IdentificationType, client.Identification, client.Email, client.Address,

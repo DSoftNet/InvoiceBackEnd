@@ -26,7 +26,7 @@ namespace Invoice.Application.Queries
         {
             await _mediator.Send(new ValidateUserService(query.UserId), cancellationToken);
 
-            var subsidiary = await _subsidiaryRepository.Get(query.IdSubsidiary);
+            var subsidiary = await _subsidiaryRepository.GetByIdAndUserId(query.SubsidiaryId, query.UserId);
 
             return new SubsidiaryResponse(subsidiary.Id, subsidiary.Name, subsidiary.Address, subsidiary.Phone1,
                 subsidiary.Phone2, subsidiary.UserId);

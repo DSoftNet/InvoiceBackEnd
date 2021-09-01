@@ -76,6 +76,7 @@ namespace Invoice.Api.Controllers
         /// 
         /// </remarks>
         /// <param name="idClient"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType((int) HttpStatusCode.OK)]

@@ -10,9 +10,9 @@ namespace Invoice.Application.Queries
         public Guid IdClient{ get; private set; }
         public Guid UserId{ get; private set; }
 
-        public ReadClientQuery(Guid idclient, Guid userId)
+        public ReadClientQuery(Guid idClient, Guid userId)
         {
-            IdClient = idclient;
+            IdClient = idClient;
             UserId = userId;
         }
 
