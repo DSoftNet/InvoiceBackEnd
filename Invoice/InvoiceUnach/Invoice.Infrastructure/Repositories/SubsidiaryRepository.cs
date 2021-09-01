@@ -23,7 +23,7 @@ namespace Invoice.Infrastructure.Repositories
             return await _dbContext.Subsidiaries.ToListAsync();
         }
 
-        public async Task<Subsidiary> GetById(Guid id)
+        public async Task<Subsidiary> Get(Guid id)
         {
             return await _dbContext.Subsidiaries.FirstOrDefaultAsync(x => x.Id == id);
         }
