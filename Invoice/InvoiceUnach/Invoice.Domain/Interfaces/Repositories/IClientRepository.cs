@@ -8,10 +8,11 @@ namespace Invoice.Domain.Interfaces.Repositories
 {
     public interface IClientRepository : IRepository<Client>
     {
-        Task<List<Client>> Gets();
-        Task<Client> Get(Guid id);
-        Task<Client> Get(string email);
+        Task<List<Client>> Get(Guid userId);
+        Task<Client> GetById(Guid id);
+        Task<Client> GetByEmail(string email);
         Client Add(Client client);
         Client Update(Client client);
+        Task<Client> GetByIdAndUserId(Guid id, Guid userId);
     }
 }

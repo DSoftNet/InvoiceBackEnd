@@ -44,7 +44,7 @@ namespace Invoice.UnitTests.Application.Commands
                 "address", "phone", "cellphone", true, DateTime.Now, DateTime.Now,
                 Guid.NewGuid());
 
-            _clientRepository.Setup(x => x.Get(It.IsAny<string>()))
+            _clientRepository.Setup(x => x.GetByEmail(It.IsAny<string>()))
                 .ReturnsAsync(null as Client);
 
             //Act
@@ -97,7 +97,7 @@ namespace Invoice.UnitTests.Application.Commands
             var dbClient = new Mock<Client>();
             dbClient.Object.SetEmail("email");
 
-            _clientRepository.Setup(x => x.Get(It.IsAny<string>()))
+            _clientRepository.Setup(x => x.GetByEmail(It.IsAny<string>()))
                 .ReturnsAsync(dbClient.Object);
 
             //Assert

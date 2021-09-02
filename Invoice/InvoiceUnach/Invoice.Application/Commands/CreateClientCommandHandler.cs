@@ -53,7 +53,7 @@ namespace Invoice.Application.Commands
 
         private async Task ValidateEmail(CreateClientCommand command)
         {
-            var client = await _clientRepository.Get(command.Email.Trim());
+            var client = await _clientRepository.GetByEmail(command.Email.Trim());
 
             if (client != null)
             {

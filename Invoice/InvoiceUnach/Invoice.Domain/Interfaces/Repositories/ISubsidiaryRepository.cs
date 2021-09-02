@@ -8,9 +8,10 @@ namespace Invoice.Domain.Interfaces.Repositories
 {
     public interface ISubsidiaryRepository : IRepository<Subsidiary>
     {
-        Task<List<Subsidiary>> Get();
+        Task<List<Subsidiary>> Get(Guid userId);
         Task<Subsidiary> GetById(Guid id);
         Subsidiary Add(Subsidiary catalog);
-        Subsidiary Update(Subsidiary catalog);
+        Subsidiary Update(Subsidiary subsidiary);
+        Task<Subsidiary> GetByIdAndUserId(Guid id, Guid userId);
     }
 }
