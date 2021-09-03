@@ -1,8 +1,57 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Invoice.Admin.Models.UserModel;
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="card-group">
+    @foreach (var user in Model.InputUsers)
+    {
+        <div class="card text-center">
+            <div class="card-body">
+                <i class="fa fa-user fa-4x text-info "></i>
+                <h5 class="card-title">@user.Identification</h5>
+                <p class="card-text">
+                    <small class="text-muted">
+                        @user.FirstName
+
+                        @if (!string.IsNullOrEmpty(user.SecondName))
+                        {
+                            @user.SecondName
+                        }
+
+                        @user.FirstLastName
+
+                        @if (!string.IsNullOrEmpty(user.SecondName))
+                        {
+                            @user.SecondLastName
+                        }
+                    </small>
+                </p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-outline-secondary">Ver más <i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+    }
+
+
+    <!-- <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Cantidad de Productos</h5>
+            <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Sucursales</h5>
+            <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </p>
+        </div>
+    </div>-->
+
 </div>
