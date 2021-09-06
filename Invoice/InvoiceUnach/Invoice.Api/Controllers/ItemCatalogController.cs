@@ -67,15 +67,16 @@ namespace Invoice.Api.Controllers
           /// 
           /// </remarks>
           /// <param name="code"></param>
+          /// <param name="codeCatalog"></param>
           /// <returns></returns>
           [HttpGet]
           [ProducesResponseType((int) HttpStatusCode.OK)]
           [ProducesResponseType((int) HttpStatusCode.BadRequest)]
           [Produces(typeof(ItemCatalogResponse))]
-          [Route("{Code}/{codeCatalog}")]
-          public async Task<IActionResult> GetByCode(string Code,string CodeCatalog)
+          [Route("{code}/{codeCatalog}")]
+          public async Task<IActionResult> GetByCode(string code,string codeCatalog)
           {
-              var queryResult = await _mediator.Send(new ReadItemCatalogQuery(Code,CodeCatalog));
+              var queryResult = await _mediator.Send(new ReadItemCatalogQuery(code,codeCatalog));
 
               return Ok(queryResult);
           }
@@ -96,9 +97,9 @@ namespace Invoice.Api.Controllers
           [ProducesResponseType((int) HttpStatusCode.OK)]
           [Produces(typeof(List<ItemCatalogResponse>))]
           [Route("{code}")]
-          public async Task<IActionResult> Get(string Code)
+          public async Task<IActionResult> Get(string code)
           {
-              var queryResult = await _mediator.Send(new ReadItemsCatalogQuery(Code));
+              var queryResult = await _mediator.Send(new ReadItemsCatalogQuery(code));
 
               return Ok(queryResult);
           }

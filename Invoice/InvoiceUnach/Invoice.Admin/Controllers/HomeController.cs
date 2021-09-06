@@ -42,15 +42,8 @@ namespace Invoice.Admin.Controllers
 
             foreach (var user in users)
             {
-                userModel.InputUsers.Add(new UserModel.InputUser
-                {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    SecondName = user.SecondName,
-                    FirstLastName = user.FirstLastName,
-                    SecondLastName = user.SecondLastName,
-                    Identification = user.Identification
-                });
+                userModel.InputUsers.Add(new UserModel.InputUser(user.Id, user.FirstName, user.SecondName,
+                    user.FirstLastName, user.SecondLastName, user.Identification));
             }
 
             return userModel;

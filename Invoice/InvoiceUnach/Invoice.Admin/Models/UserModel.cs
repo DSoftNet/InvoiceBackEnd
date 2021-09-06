@@ -7,14 +7,11 @@ namespace Invoice.Admin.Models
 {
     public class UserModel
     {
-        [TempData] 
-        public string Option { get; set; }
+        [TempData] public string Option { get; set; }
 
-        [BindProperty] 
-        public InputUser InputUserModel { get; set; }
+        [BindProperty] public InputUser InputUserModel { get; set; }
 
-        [BindProperty] 
-        public  List<InputUser> InputUsers { get; set; }
+        [BindProperty] public List<InputUser> InputUsers { get; set; }
 
         public class InputUser
         {
@@ -39,6 +36,17 @@ namespace Invoice.Admin.Models
             [Required(ErrorMessage = "Campo obligatorio")]
             [StringLength(50, ErrorMessage = "Digite máximo 50 caracteres.")]
             public string Identification { get; set; }
+
+            public InputUser(Guid id, string firstName, string secondName, string firstLastName,
+                string secondLastName, string identification)
+            {
+                Id = id;
+                FirstName = firstName;
+                SecondName = secondName;
+                FirstLastName = firstLastName;
+                SecondLastName = secondLastName;
+                Identification = identification;
+            }
         }
     }
 }

@@ -30,6 +30,7 @@ namespace Invoice.Admin
                 option.UseSqlServer(appSettings.ConnectionStrings.InvoiceDb));
             
             services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             
         }
 
