@@ -1,6 +1,9 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Invoice.Application.Commands;
+using Invoice.Application.Dtos.Responses;
+using Invoice.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -53,5 +56,53 @@ namespace Invoice.Api.Controllers
 
              return Ok(true);
          }
+          ///    /// <summary>
+          /// Get itemCatalog
+          /// </summary>
+          /// <remarks>
+          /// 
+          /// Sample request
+          ///
+          ///     GET /itemCatalog/{code}/{codeCatalog}
+          /// 
+          /// </remarks>
+          /// <param name="code"></param>
+          /// <param name="codeCatalog"></param>
+          /// <returns></returns>
+          [HttpGet]
+          [ProducesResponseType((int) HttpStatusCode.OK)]
+          [ProducesResponseType((int) HttpStatusCode.BadRequest)]
+          [Produces(typeof(ItemCatalogResponse))]
+          [Route("{code}/{codeCatalog}")]
+          public async Task<IActionResult> GetByCode(string code,string codeCatalog)
+          {
+              var queryResult = await _mediator.Send(new ReadItemCatalogQuery(code,codeCatalog));
+
+              return Ok(queryResult);
+          }
+
+          /// <summary>
+          /// Get itemsCatalog
+          /// </summary>
+          /// <remarks>
+          /// 
+          /// Sample request
+          ///
+          ///     GET /itemCatalog/{code}
+          /// 
+          /// </remarks>
+          /// <param name="code"></param>
+          /// <returns></returns>
+          [HttpGet]
+          [ProducesResponseType((int) HttpStatusCode.OK)]
+          [Produces(typeof(List<ItemCatalogResponse>))]
+          [Route("{code}")]
+          public async Task<IActionResult> Get(string code)
+          {
+              var queryResult = await _mediator.Send(new ReadItemsCatalogQuery(code));
+
+              return Ok(queryResult);
+          }
+
     }
 }
