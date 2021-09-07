@@ -1,0 +1,68 @@
+﻿@model Invoice.Admin.Models.ProductModel;
+@{
+    ViewBag.Title = "Facturación|Productos";
+    Layout = "_Layout";
+}
+<div class="col-md-12">
+    <h1>Productos</h1>
+</div>
+<hr/>
+@if (Model.Option == "List")
+{
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-title">
+                <h2>Listado de productos</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach (var product in @Model.InputProducts)
+                        {
+                            <tr>
+                                <td>@product.Code</td>
+                                <td>@product.Name</td>
+                                <td>@product.Stock</td>
+                                <td>@product.Price</td>
+                                <td>
+                                    @if (@product.Status)
+                                    {
+                                        @Html.Label("Activo")
+                                        ;
+                                    }
+                                    else
+                                    {
+                                        @Html.Label("Inactivo")
+                                        ;
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="LoadProduct" asp-route-productId="@product.Id" class="btn btn-warning btn-sm text-white">
+                                        <i class="fa fa-pencil-square-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+}

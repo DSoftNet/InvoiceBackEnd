@@ -34,11 +34,10 @@ namespace Invoice.Admin.Controllers
 
         private async Task<UserModel> Users()
         {
-            UserModel userModel = new UserModel();
+            var userModel = new UserModel();
             var users = await _userRepository.Get();
 
             userModel.InputUsers = new List<UserModel.InputUser>();
-
 
             foreach (var user in users)
             {
