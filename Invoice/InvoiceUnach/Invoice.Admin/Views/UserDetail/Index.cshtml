@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Invoice.Admin.Models.UserDetailModel;
+
+@{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
@@ -11,11 +13,11 @@
         <div class="card h-100">
             <div class="card-body">
                 <i class="fa fa-opencart fa-4x text-warning"></i>
-                <p class="card-text text-warning">1 /<small>productos</small></p>
+                <p class="card-text text-warning">@Model.ProductsTotal /<small>productos</small></p>
             </div>
             <div class="card-footer">
                 <small class="text-muted">
-                    <a class="btn btn-outline-warning btn-sm" href="../UserDetail/Index">Administrar Productos <i class="fa fa-eye"></i></a>
+                    <a class="btn btn-outline-warning btn-sm" href="../Product/Index?userId=@Model.UserId">Administrar Productos <i class="fa fa-eye"></i></a>
                 </small>
             </div>
         </div>
@@ -24,7 +26,7 @@
         <div class="card h-100">
             <div class="card-body">
                 <i class="fa fa-users fa-4x text-success"></i>
-                <p class="card-text text-success">1 /<small>clientes</small></p>
+                <p class="card-text text-success">@Model.ClientsTotal /<small>clientes</small></p>
             </div>
             <div class="card-footer">
                 <small class="text-muted">
@@ -37,7 +39,7 @@
         <div class="card h-100">
             <div class="card-body">
                 <i class="fa fa-building fa-4x text-info"></i>
-                <p class="card-text text-info">1 /<small>sucursales</small></p>
+                <p class="card-text text-info">@Model.SubsidiariesTotal /<small>sucursales</small></p>
             </div>
             <div class="card-footer">
                 <small class="text-muted">

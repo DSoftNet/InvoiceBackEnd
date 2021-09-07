@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Invoice.Domain.Entities;
 using Invoice.Domain.Interfaces.Repositories;
@@ -18,9 +19,9 @@ namespace Invoice.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<Product>> Get()
+        public async Task<List<Product>> Get(Guid userId)
         {
-            return await _dbContext.Products.ToListAsync();
+            return await _dbContext.Products.Where(x=>x.UserId == userId).ToListAsync();
         }
 
         public async Task<Product> GetById(Guid id)
