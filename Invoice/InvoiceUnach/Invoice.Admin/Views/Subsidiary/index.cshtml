@@ -1,0 +1,55 @@
+﻿@model Invoice.Admin.Models.SubsidiaryModel;
+@{
+    ViewBag.Title = "Facturación|Sucursales";
+    Layout = "_Layout";
+}
+<div class="col-md-12">
+    <h1>Sucursales</h1>
+</div>
+<hr/>
+@if (Model.Option == "List")
+{
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-title">
+                <h2>Listado de Sucursales</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Teléfono1</th>
+                            <th scope="col">Teléfono2</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach (var subsidiary in @Model.InputSubsidiaries)
+                        {
+                            <tr>
+                                <td>@subsidiary.Name</td>
+                                <td>@subsidiary.Address</td>
+                                <td>@subsidiary.Phone1</td>
+                                <td>@subsidiary.Phone2</td>
+                                <td>
+                                    <a asp-action="LoadSubsidiary" asp-route-productId="@subsidiary.Id" class="btn btn-warning btn-sm text-white">
+                                        <i class="fa fa-pencil-square-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+}

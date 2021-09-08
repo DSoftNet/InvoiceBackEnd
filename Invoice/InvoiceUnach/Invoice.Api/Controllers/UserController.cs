@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using Invoice.Application.Commands;
-using Invoice.Application.Dtos.Responses;
-using Invoice.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -42,8 +39,8 @@ namespace Invoice.Api.Controllers
         ///         "address":"address",
         ///         "phone":"phone",
         ///         "cellPhone":"cellPhone",
-        ///         "userName":"userName",
-        ///         "password":"password",
+        ///         "userName":"name",
+        ///         "password":"name",
         ///         "status":"status",
         ///     }
         /// 
