@@ -53,6 +53,11 @@
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
                                 </td>
+                                <td>
+                                    <a class="btn btn-danger btn-sm text-white">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
                             </tr>
                         }
                         </tbody>
@@ -64,5 +69,54 @@
 
             </div>
         </div>
+    </div>
+}
+@if (Model.Option == "Edit")
+{
+    <div class="col-md-12">
+        <form method="post" asp-controller="Product" asp-action="Update">
+            <div class="card">
+                <div class="card-title">
+                    <h2>Editar</h2>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="@Model.InputProductModel.Id"/>
+                    @Html.HiddenFor(model => model.Option)
+                    <div class="row">
+                        <div class="col">
+                            <input asp-for="InputProductModel.Name" class="form-control" placeholder="Nombre">
+                            <span asp-validation-for="InputProductModel.Name" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <input asp-for="InputProductModel.Description" class="form-control" placeholder="Descripción">
+                            <span asp-validation-for="InputProductModel.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <input asp-for="InputProductModel.Code" class="form-control" placeholder="Código">
+                            <span asp-validation-for="InputProductModel.Code" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <input asp-for="InputProductModel.Price" class="form-control" placeholder="Precio">
+                            <span asp-validation-for="InputProductModel.Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <input asp-for="InputProductModel.Stock" class="form-control" placeholder="Stock">
+                            <span asp-validation-for="InputProductModel.Stock" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-outline-secondary btn-sm"><i class="fa fa-angle-left"></i> Volver</a>
+                    <button class="btn btn-outline-success btn-sm" type="submit">Actualizar <i class="fa fa-save"></i></button>
+                </div>
+            </div>
+        </form>
     </div>
 }

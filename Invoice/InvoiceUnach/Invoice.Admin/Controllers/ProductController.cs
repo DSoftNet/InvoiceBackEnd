@@ -27,10 +27,41 @@ namespace Invoice.Admin.Controllers
         public async Task<IActionResult> LoadProduct(Guid productId)
         {
             var productModel = new ProductModel();
-
             productModel.Option = "Edit";
-            
+
+            var product = await _productRepository.GetById(productId);
+
+            productModel.InputProductModel =
+                new ProductModel.InputProduct
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Code = product.Code,
+                    Price = product.Price,
+                    IsIva = product.IsIva,
+                    Stock = product.Stock,
+                    IsExpiration = product.IsExpiration,
+                    ExpirationAt = product.ExpirationAt,
+                    Status = product.Status,
+                    UserId = product.UserId
+                };
+
             return View("Index", productModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(ProductModel productModel)
+        {
+            if (ModelState.IsValid)
+            {
+            }
+            else
+            {
+                return await Task.Run(() => View("Index", productModel));
+            }
+
+            return View();
         }
 
         #region Private Methods
@@ -48,9 +79,20 @@ namespace Invoice.Admin.Controllers
             foreach (var product in products)
             {
                 productModel.InputProducts.Add(
-                    new ProductModel.InputProduct(product.Id, product.Name, product.Description, product.Code,
-                        product.Price, product.IsIva, product.Stock, product.IsExpiration, product.ExpirationAt,
-                        product.Status, product.UserId));
+                    new ProductModel.InputProduct
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Description = product.Description,
+                        Code = product.Code,
+                        Price = product.Price,
+                        IsIva = product.IsIva,
+                        Stock = product.Stock,
+                        IsExpiration = product.IsExpiration,
+                        ExpirationAt = product.ExpirationAt,
+                        Status = product.Status,
+                        UserId = product.UserId
+                    });
             }
 
             return productModel;

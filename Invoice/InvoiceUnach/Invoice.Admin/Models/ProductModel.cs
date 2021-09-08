@@ -47,22 +47,6 @@ namespace Invoice.Admin.Models
             public bool Status { get; set; }
 
             public Guid UserId { get; set; }
-
-            public InputProduct(Guid id, string name, string description, string code, decimal price, bool isIva, int stock,
-                bool isExpiration, DateTime expirationAt, bool status, Guid userId)
-            {
-                Id = id;
-                Name = name;
-                Description = description;
-                Code = code;
-                Price = price;
-                IsIva = isIva;
-                Stock = stock;
-                IsExpiration = isExpiration;
-                ExpirationAt = expirationAt;
-                Status = status;
-                UserId = userId;
-            }
         }
     }
 }
