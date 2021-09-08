@@ -30,7 +30,41 @@ namespace Invoice.Admin.Controllers
 
            clientModel.Option = "Edit";
             
+           var client = await _clientRepository.GetById(clientId);
+
+           clientModel.InputClientModel =
+               new ClientModel.InputClient
+               {
+                   Id = client.Id,
+                   FirstName = client.FirstName,
+                   SecondName = client.SecondName,
+                   FirstLastName = client.FirstLastName,
+                   SecondLastName = client.SecondLastName,
+                   IdentificationType = client.IdentificationType,
+                   Identification = client.Identification,
+                   Email = client.Email,
+                   Address = client.Address,
+                   Phone = client.Phone,
+                   CellPhone = client.CellPhone,
+                   Status = client.Status,
+                   UserId = client.UserId
+               };
+
            return View("Index", clientModel);
+       }
+       
+       [HttpPost]
+       public async Task<IActionResult> Update(ClientModel clientModel)
+       {
+           if (ModelState.IsValid)
+           {
+           }
+           else
+           {
+               return await Task.Run(() => View("Index", clientModel));
+           }
+
+           return View();
        }
 
        #region Private Methods
@@ -48,9 +82,21 @@ namespace Invoice.Admin.Controllers
            foreach (var client in clients)
            {
                clientModel.InputClients.Add(
-                   new ClientModel.InputClient(client.Id, client.FirstName, client.SecondName, client.FirstLastName,
-                       client.SecondLastName, client.IdentificationType, client.Identification, client.Email,
-                       client.Address, client.Phone, client.CellPhone, client.Status, client.UserId));
+                   new ClientModel.InputClient{
+                       Id = client.Id,
+                       FirstName = client.FirstName,
+                       SecondName = client.SecondName,
+                       FirstLastName = client.FirstLastName,
+                       SecondLastName = client.SecondLastName,
+                       IdentificationType = client.IdentificationType,
+                       Identification = client.Identification,
+                       Email = client.Email,
+                       Address = client.Address,
+                       Phone = client.Phone,
+                       CellPhone = client.CellPhone,
+                       Status = client.Status,
+                       UserId = client.UserId
+                   });
            }
 
            return clientModel;
