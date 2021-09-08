@@ -31,9 +31,36 @@ namespace Invoice.Admin.Controllers
 
             subsidiaryModel.Option = "Edit";
             
+            var subsidiary = await _subsidiaryRepository.GetById(subsidiaryId);
+            
+            subsidiaryModel.InputSubsidiaryModel= 
+                new SubsidiaryModel.InputSubsidiary
+                {
+                    Id = subsidiary.Id,
+                    Name = subsidiary.Name,
+                    Address = subsidiary.Address,
+                    Phone1 = subsidiary.Phone1,
+                    Phone2 = subsidiary.Phone2,
+                    UserId = subsidiary.UserId
+                };
+            
             return View("Index", subsidiaryModel);
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> Update(SubsidiaryModel subsidiaryModel)
+        {
+            if (ModelState.IsValid)
+            {
+            }
+            else
+            {
+                return await Task.Run(() => View("Index", subsidiaryModel));
+            }
 
+            return View();
+        }
+        
         #region Private Methods
         
         private async Task<SubsidiaryModel> GetSubsidiaries (Guid userId)
@@ -49,11 +76,19 @@ namespace Invoice.Admin.Controllers
             foreach (var subsidiary in subsidiaries)
             {
                 subsidiaryModel.InputSubsidiaries.Add(
-                    new SubsidiaryModel.InputSubsidiary(subsidiary.Id,subsidiary.Name,subsidiary.Address,
-                        subsidiary.Phone1,subsidiary.Phone2,subsidiary.UserId));
+                    new SubsidiaryModel.InputSubsidiary
+                {
+                    Id = subsidiary.Id,
+                    Name = subsidiary.Name,
+                    Address = subsidiary.Address,
+                    Phone1 = subsidiary.Phone1,
+                    Phone2 = subsidiary.Phone2,
+                    UserId = subsidiary.UserId
+                });
             }
-
+            
             return subsidiaryModel;
+            
         }
         
         #endregion
