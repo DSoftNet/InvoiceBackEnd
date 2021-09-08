@@ -22,7 +22,7 @@ namespace Invoice.Admin.Controllers
         // GET
         public async Task<IActionResult> Index(Guid userId)
         {
-            return View(await GetSubsidiarys(userId));
+            return View(await GetSubsidiaries(userId));
         }
         
         public async Task<IActionResult> LoadSubsidiary(Guid subsidiaryId)
@@ -36,19 +36,19 @@ namespace Invoice.Admin.Controllers
 
         #region Private Methods
         
-        private async Task<SubsidiaryModel> GetSubsidiarys (Guid userId)
+        private async Task<SubsidiaryModel> GetSubsidiaries (Guid userId)
         {
             var subsidiaryModel = new SubsidiaryModel();
 
             subsidiaryModel.Option = "List";
 
-            subsidiaryModel.InputSubsidiarys = new List<SubsidiaryModel.InputSubsidiary>();
+            subsidiaryModel.InputSubsidiaries = new List<SubsidiaryModel.InputSubsidiary>();
 
-            var subsidiarys = await _subsidiaryRepository.Get(userId);
+            var subsidiaries = await _subsidiaryRepository.Get(userId);
 
-            foreach (var subsidiary in subsidiarys)
+            foreach (var subsidiary in subsidiaries)
             {
-                subsidiaryModel.InputSubsidiarys.Add(
+                subsidiaryModel.InputSubsidiaries.Add(
                     new SubsidiaryModel.InputSubsidiary(subsidiary.Id,subsidiary.Name,subsidiary.Address,
                         subsidiary.Phone1,subsidiary.Phone2,subsidiary.UserId));
             }
