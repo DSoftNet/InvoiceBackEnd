@@ -5,9 +5,9 @@ namespace Invoice.Admin.Controllers
     public class SubsidiaryController : Controller
     {
         // GET
-        public IActionResult Index()
+        /*public IActionResult Index()
         {
-            return View();
-        }
+            //return View();
+        }*/
     }
 }
