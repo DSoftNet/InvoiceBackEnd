@@ -1,11 +1,11 @@
 ﻿@model Invoice.Admin.Models.UserDetailModel;
-
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 <div class="col-md-12">
-    <h1>Bienvenido Alex Asitimbay</h1>
+    <h1>Bienvenido @Model.Firsname</h1>
+
 </div>
 <hr/>
 <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
@@ -30,7 +30,7 @@
             </div>
             <div class="card-footer">
                 <small class="text-muted">
-                    <a class="btn btn-outline-success btn-sm" href="../UserDetail/Index">Administrar Clientes <i class="fa fa-eye"></i></a>
+                    <a class="btn btn-outline-success btn-sm" href="../Client/Index?userId=@Model.UserId">Administrar Clientes <i class="fa fa-eye"></i></a>
                 </small>
             </div>
         </div>

@@ -1,0 +1,68 @@
+﻿@model Invoice.Admin.Models.ClientModel;
+@{
+    ViewBag.Title = "Facturación|Client";
+    Layout = "_Layout";
+}
+<div class="col-md-12">
+    <h1>Client</h1>
+</div>
+<hr/>
+@if (Model.Option == "List")
+{
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-title">
+                <h2>Listado de clientes</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach (var client in @Model.InputClients)
+                        {
+                            <tr>
+                                <td>@client.Id</td>
+                                <td>@client.FirstName</td>
+                                <td>@client.SecondName</td>
+                                <td>@client.Email</td>
+                                <td>
+                                    @if (@client.Status)
+                                    {
+                                        @Html.Label("Activo")
+                                        ;
+                                    }
+                                    else
+                                    {
+                                        @Html.Label("Inactivo")
+                                        ;
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="LoadClient" asp-route-clientId="@client.Id" class="btn btn-warning btn-sm text-white">
+                                        <i class="fa fa-pencil-square-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+}

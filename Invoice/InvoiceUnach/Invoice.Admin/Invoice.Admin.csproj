@@ -27,4 +27,8 @@
       <ProjectReference Include="..\Invoice.Infrastructure\Invoice.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Views\Subsidiary" />
+    </ItemGroup>
+
 </Project>

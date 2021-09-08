@@ -19,7 +19,7 @@ namespace Invoice.Api.Controllers
             _logger = logger;
             _mediator = mediator;
         }
-
+        
         /// <summary>
         /// Added a user
         /// </summary>
@@ -61,5 +61,6 @@ namespace Invoice.Api.Controllers
 
             return Ok(true);
         }
+
     }
 }
