@@ -15,21 +15,24 @@ namespace Invoice.Admin.Controllers
         private readonly IProductRepository _productRepository;
         private readonly IClientRepository _clientRepository;
         private readonly ISubsidiaryRepository _subsidiaryRepository;
+        private readonly IUserRepository _userRepository;
 
         public UserDetailController(ILogger<UserDetailController> logger, IProductRepository productRepository,
-            IClientRepository clientRepository, ISubsidiaryRepository subsidiaryRepository)
+            IClientRepository clientRepository, ISubsidiaryRepository subsidiaryRepository, IUserRepository userRepository)
         {
             _logger = logger;
             _productRepository = productRepository;
             _clientRepository = clientRepository;
             _subsidiaryRepository = subsidiaryRepository;
+            _userRepository = userRepository;
         }
 
-        public async Task<IActionResult> Index(Guid userId)
+        public async Task<IActionResult> Index(Guid userId, string firstName)
         {
             var userDetailModel = new UserDetailModel();
 
             userDetailModel.UserId = userId;
+            userDetailModel.Firsname = firstName;
             userDetailModel.ProductsTotal = await ProductTotal(userId);
             userDetailModel.ClientsTotal = await ClientTotal(userId);
             userDetailModel.SubsidiariesTotal = await SubsidiaryTotal(userId);
@@ -58,5 +61,6 @@ namespace Invoice.Admin.Controllers
         }
 
         #endregion
+        
     }
 }
