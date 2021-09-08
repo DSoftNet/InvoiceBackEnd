@@ -47,7 +47,7 @@ namespace Invoice.Admin.Models
             public bool Status { get;  set; }
             public Guid UserId { get;  set; }
             
-            public InputClient(Guid id, string firstName, string secondName, string firstLastName,
+           /* public InputClient(Guid id, string firstName, string secondName, string firstLastName,
                 string secondLastName, string identificationType, string identification, string email, string address,
                 string phone, string cellPhone, bool status, Guid userId)
             {
@@ -64,7 +64,7 @@ namespace Invoice.Admin.Models
                 CellPhone = cellPhone;
                 Status = status;
                 UserId = userId;
-            }
+            }*/
         }
     }
 }
