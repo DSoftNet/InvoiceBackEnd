@@ -10,6 +10,7 @@ namespace Invoice.Domain.Interfaces.Repositories
     {
         Task<List<User>> Get();
         Task<User> GetByIdentification(string identification);
+        Task<User> GetByIdentificationOrId(string identification,Guid? id);
         Task<User> GetById(Guid id);
         User Add(User user);
         User Update(User user);

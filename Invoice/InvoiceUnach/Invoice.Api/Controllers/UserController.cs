@@ -1,6 +1,9 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Invoice.Application.Commands;
+using Invoice.Application.Dtos.Responses;
+using Invoice.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,7 +22,7 @@ namespace Invoice.Api.Controllers
             _logger = logger;
             _mediator = mediator;
         }
-
+        
         /// <summary>
         /// Added a user
         /// </summary>
@@ -39,8 +42,8 @@ namespace Invoice.Api.Controllers
         ///         "address":"address",
         ///         "phone":"phone",
         ///         "cellPhone":"cellPhone",
-        ///         "userName":"name",
-        ///         "password":"name",
+        ///         "userName":"userName",
+        ///         "password":"password",
         ///         "status":"status",
         ///     }
         /// 
@@ -61,5 +64,6 @@ namespace Invoice.Api.Controllers
 
             return Ok(true);
         }
+
     }
 }
