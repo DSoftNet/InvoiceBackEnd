@@ -8,7 +8,7 @@ namespace Invoice.Domain.Interfaces.Repositories
 {
     public interface IProductRepository : IRepository<Product>
     {
-        Task<List<Product>> Get();
+        Task<List<Product>> Get(Guid userId);
         Task<Product> GetById(Guid id);
         Product Add(Product product);
         Product Update(Product product);

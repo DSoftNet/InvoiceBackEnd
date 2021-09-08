@@ -31,7 +31,7 @@ namespace Invoice.Api
             var context = services.GetRequiredService<InvoiceDbContext>();
 
             // Ensure the database is created
-           // await context.Database.EnsureCreatedAsync();
+          // await context.Database.EnsureCreatedAsync();
 
             await host.RunAsync();
         }

@@ -29,7 +29,7 @@ namespace Invoice.Domain.Services.Validations
 
             if (catalog == null)
             {
-                throw new InvoiceDomainException($"The code from item catalog {service.Code} doesn't exist.",
+                throw new InvoiceDomainException($"The code from  catalog {service.Code} doesn't exist.",
                     HttpStatusCode.BadRequest);
             }
 

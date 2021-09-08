@@ -12,7 +12,7 @@ namespace Invoice.Api.Controllers
 {
     [ApiController]
     [Route("user")]
-    public class UserController: ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
         private readonly IMediator _mediator;
@@ -22,7 +22,7 @@ namespace Invoice.Api.Controllers
             _logger = logger;
             _mediator = mediator;
         }
-        /*
+        
         /// <summary>
         /// Added a user
         /// </summary>
@@ -50,7 +50,6 @@ namespace Invoice.Api.Controllers
         /// </remarks>
         /// <param name="command"></param>
         /// <returns></returns>
-        
         [HttpPost]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [ProducesResponseType((int) HttpStatusCode.OK)]
@@ -65,6 +64,7 @@ namespace Invoice.Api.Controllers
 
             return Ok(true);
         }
+<<<<<<< HEAD
        */
         /// <summary>
         /// Get user
@@ -137,5 +137,7 @@ namespace Invoice.Api.Controllers
             return Ok(commandResult);
         }
 
+=======
+>>>>>>> development
     }
 }

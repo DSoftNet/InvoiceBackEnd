@@ -174,6 +174,62 @@ namespace Invoice.Infrastructure.Migrations
                     b.ToTable("ItemCatalog");
                 });
 
+            modelBuilder.Entity("Invoice.Domain.Entities.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("ExpirationAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsExpiration")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsIva")
+                        .HasMaxLength(100)
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<decimal>("Price")
+                        .HasMaxLength(100)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Product");
+                });
+
             modelBuilder.Entity("Invoice.Domain.Entities.Subsidiary", b =>
                 {
                     b.Property<Guid>("Id")
@@ -343,6 +399,15 @@ namespace Invoice.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Invoice.Domain.Entities.Product", b =>
+                {
+                    b.HasOne("Invoice.Domain.Entities.User", null)
+                        .WithMany("Products")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Invoice.Domain.Entities.Subsidiary", b =>
                 {
                     b.HasOne("Invoice.Domain.Entities.User", null)
@@ -388,6 +453,8 @@ namespace Invoice.Infrastructure.Migrations
             modelBuilder.Entity("Invoice.Domain.Entities.User", b =>
                 {
                     b.Navigation("Clients");
+
+                    b.Navigation("Products");
 
                     b.Navigation("Subsidiaries");
 

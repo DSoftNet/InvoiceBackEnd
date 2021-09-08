@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Invoice.Domain.Entities;
 using Invoice.Domain.Interfaces.Repositories;
@@ -18,18 +19,19 @@ namespace Invoice.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<Client>> Gets()
+        public async Task<List<Client>> Get(Guid userId)
         {
-            return await _dbContext.Clients.ToListAsync();
+            return await _dbContext.Clients.Where(x => x.UserId == userId).ToListAsync();
         }
 
-        public async Task<Client> Get(Guid id)
+        public async Task<Client> GetById(Guid id)
         {
             return await _dbContext.Clients.FirstOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<Client> Get(string email)
+
+        public async Task<Client> GetByEmail(string email)
         {
-            return await _dbContext.Clients.FirstOrDefaultAsync(x => x.Email== email);
+            return await _dbContext.Clients.FirstOrDefaultAsync(x => x.Email == email);
         }
 
         public Client Add(Client client)
@@ -42,6 +44,9 @@ namespace Invoice.Infrastructure.Repositories
             return _dbContext.Clients.Update(client).Entity;
         }
 
-    }    
-
+        public async Task<Client> GetByIdAndUserId(Guid id, Guid userId)
+        {
+            return await _dbContext.Clients.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+        }
+    }
 }
