@@ -27,12 +27,13 @@ namespace Invoice.Admin.Controllers
             _userRepository = userRepository;
         }
 
-        public async Task<IActionResult> Index(Guid userId, string firstName)
+        public async Task<IActionResult> Index(Guid userId)
         {
             var userDetailModel = new UserDetailModel();
+            var user = await _userRepository.GetById(userId);
 
             userDetailModel.UserId = userId;
-            userDetailModel.Firsname = firstName;
+            userDetailModel.Names = user.FirstName+" "+ user.SecondName+" "+ user.FirstLastName+" "+ user.SecondLastName;
             userDetailModel.ProductsTotal = await ProductTotal(userId);
             userDetailModel.ClientsTotal = await ClientTotal(userId);
             userDetailModel.SubsidiariesTotal = await SubsidiaryTotal(userId);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Invoice.Admin.Models;
+using Invoice.Domain.Entities;
 using Invoice.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,6 +24,8 @@ namespace Invoice.Admin.Controllers
         {
             return View(await GetProducts(userId));
         }
+
+        #region Methods Update
 
         public async Task<IActionResult> LoadProduct(Guid productId)
         {
@@ -55,14 +58,86 @@ namespace Invoice.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var product = await _productRepository.GetById(productModel.InputProductModel.Id);
+
+                product.SetName(productModel.InputProductModel.Name);
+                product.SetDescription(productModel.InputProductModel.Description);
+                product.SetCode(productModel.InputProductModel.Code);
+                product.SetPrice(productModel.InputProductModel.Price);
+                product.SetIsIva(productModel.InputProductModel.IsIva);
+                product.SetStock(productModel.InputProductModel.Stock);
+                product.SetIsExpiration(productModel.InputProductModel.IsExpiration);
+                product.SetExpirationAt(productModel.InputProductModel.ExpirationAt);
+                product.SetStatus(productModel.InputProductModel.Status);
+
+                _productRepository.Update(product);
+                await _productRepository.UnitOfWork.SaveEntitiesAsync();
+
+                productModel = await GetProducts(productModel.InputProductModel.UserId);
+
+                return await Task.Run(() => View("Index", productModel));
             }
             else
             {
                 return await Task.Run(() => View("Index", productModel));
             }
-
-            return View();
         }
+
+        #endregion
+
+        #region Methods Delete
+
+        public async Task<IActionResult> Delete(Guid productId, Guid userId)
+        {
+            var product = await _productRepository.GetById(productId);
+
+            _productRepository.Delete(product);
+            await _productRepository.UnitOfWork.SaveEntitiesAsync();
+
+            var productModel = await GetProducts(userId);
+
+            return View("Index", productModel);
+        }
+
+        #endregion
+
+        #region Methods Create
+
+        public IActionResult LoadFormCreate(Guid userId)
+        {
+            var productModel = new ProductModel();
+            productModel.Option = "Add";
+            productModel.UserId = userId;
+
+            return View("Index", productModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(ProductModel productModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var product = new Product(productModel.InputProductModel.Name,
+                    productModel.InputProductModel.Description, productModel.InputProductModel.Code,
+                    productModel.InputProductModel.Price, productModel.InputProductModel.IsIva,
+                    productModel.InputProductModel.Stock, productModel.InputProductModel.IsExpiration,
+                    productModel.InputProductModel.ExpirationAt, productModel.InputProductModel.Status,
+                    productModel.UserId);
+
+                _productRepository.Add(product);
+                await _productRepository.UnitOfWork.SaveEntitiesAsync();
+
+                productModel = await GetProducts(productModel.UserId);
+
+                return await Task.Run(() => View("Index", productModel));
+            }
+            else
+            {
+                return await Task.Run(() => View("Index", productModel));
+            }
+        }
+
+        #endregion
 
         #region Private Methods
 
@@ -71,6 +146,7 @@ namespace Invoice.Admin.Controllers
             var productModel = new ProductModel();
 
             productModel.Option = "List";
+            productModel.UserId = userId;
 
             productModel.InputProducts = new List<ProductModel.InputProduct>();
 

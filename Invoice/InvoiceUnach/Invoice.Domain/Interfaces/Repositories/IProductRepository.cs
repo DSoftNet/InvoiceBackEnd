@@ -13,5 +13,6 @@ namespace Invoice.Domain.Interfaces.Repositories
         Product Add(Product product);
         Product Update(Product product);
         Task<Product> GetByCode(string code);
+        void Delete(Product product);
     }
 }

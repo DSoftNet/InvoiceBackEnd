@@ -9,6 +9,8 @@ namespace Invoice.Admin.Models
     {
         [TempData] public string Option { get; set; }
 
+        [BindProperty] public Guid UserId { get; set; }
+        
         [BindProperty] public InputProduct InputProductModel { get; set; }
 
         [BindProperty] public List<InputProduct> InputProducts { get; set; }
@@ -16,6 +18,7 @@ namespace Invoice.Admin.Models
         public class InputProduct
         {
             public Guid Id { get; set; }
+            
             [Required(ErrorMessage = "Campo obligatorio")]
             [StringLength(50, ErrorMessage = "Digite máximo 50 caracteres.")]
             public string Name { get; set; }
