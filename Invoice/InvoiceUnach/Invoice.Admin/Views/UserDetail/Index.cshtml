@@ -1,11 +1,11 @@
 ﻿@model Invoice.Admin.Models.UserDetailModel;
-
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Facturación|Detalle de usuario";
     Layout = "_Layout";
 }
 <div class="col-md-12">
-    <h1>Bienvenido Alex Asitimbay</h1>
+    <h1>Bienvenido @Model.Names</h1>
+
 </div>
 <hr/>
 <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
@@ -30,7 +30,7 @@
             </div>
             <div class="card-footer">
                 <small class="text-muted">
-                    <a class="btn btn-outline-success btn-sm" href="../UserDetail/Index">Administrar Clientes <i class="fa fa-eye"></i></a>
+                    <a class="btn btn-outline-success btn-sm" href="../Client/Index?userId=@Model.UserId">Administrar Clientes <i class="fa fa-eye"></i></a>
                 </small>
             </div>
         </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="card-footer">
                 <small class="text-muted">
-                    <a class="btn btn-outline-info btn-sm" href="../UserDetail/Index">Administrar Sucursales <i class="fa fa-eye"></i></a>
+                    <a class="btn btn-outline-info btn-sm" href="../Subsidiary/Index?userId=@Model.UserId">Administrar Sucursales <i class="fa fa-eye"></i></a>
                 </small>
             </div>
         </div>

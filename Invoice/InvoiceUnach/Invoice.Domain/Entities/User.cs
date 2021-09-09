@@ -98,6 +98,7 @@ namespace Invoice.Domain.Entities
 
         public void SetIdentificationType(string value)
         {
+            if (string.IsNullOrEmpty(value)) throw new InvoiceDomainException("The identificationType is required.");
             IdentificationType = value;
         }
 

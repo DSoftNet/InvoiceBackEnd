@@ -1,0 +1,103 @@
+﻿@model Invoice.Admin.Models.SubsidiaryModel;
+@{
+    ViewBag.Title = "Facturación|Sucursales";
+    Layout = "_Layout";
+}
+<div class="col-md-12">
+    <h1>Sucursales</h1>
+</div>
+<hr/>
+@if (Model.Option == "List")
+{
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-title">
+                <h2>Listado de Sucursales</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Teléfono1</th>
+                            <th scope="col">Teléfono2</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach (var subsidiary in @Model.InputSubsidiaries)
+                        {
+                            <tr>
+                                <td>@subsidiary.Name</td>
+                                <td>@subsidiary.Address</td>
+                                <td>@subsidiary.Phone1</td>
+                                <td>@subsidiary.Phone2</td>
+                                <td>
+                                    <a asp-action="LoadSubsidiary" asp-route-subsidiaryId="@subsidiary.Id" class="btn btn-warning btn-sm text-white">
+                                        <i class="fa fa-pencil-square-o"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger btn-sm text-white">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+}
+@if (Model.Option == "Edit")
+{
+    <div class="col-md-12">
+        <form method="post" asp-controller="Subsidiary" asp-action="Update">
+            <div class="card">
+                <div class="card-title">
+                    <h2>Editar</h2>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="@Model.InputSubsidiaryModel.Id"/>
+                    @Html.HiddenFor(model => model.Option)
+                    <div class="row">
+                        <div class="col">
+                            <input asp-for="InputSubsidiaryModel.Name" class="form-control" placeholder="Nombre">
+                            <span asp-validation-for="InputSubsidiaryModel.Name" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <input asp-for="InputSubsidiaryModel.Address" class="form-control" placeholder="Dirección">
+                            <span asp-validation-for="InputSubsidiaryModel.Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <input asp-for="InputSubsidiaryModel.Phone1" class="form-control" placeholder="Teléfono1">
+                            <span asp-validation-for="InputSubsidiaryModel.Phone1" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <input asp-for="InputSubsidiaryModel.Phone2" class="form-control" placeholder="Teléfono2">
+                            <span asp-validation-for="InputSubsidiaryModel.Phone2" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-outline-secondary btn-sm"><i class="fa fa-angle-left"></i> Volver</a>
+                    <button class="btn btn-outline-success btn-sm" type="submit">Actualizar <i class="fa fa-save"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+}

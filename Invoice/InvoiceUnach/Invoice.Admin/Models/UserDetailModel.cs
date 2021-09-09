@@ -6,7 +6,9 @@ namespace Invoice.Admin.Models
 {
     public class UserDetailModel
     {
+        
         [BindProperty] public Guid UserId { get; set; }
+        [BindProperty] public string Names { get; set; }
         [BindProperty] public int ProductsTotal { get; set; }
         [BindProperty] public int SubsidiariesTotal { get; set; }
         [BindProperty] public int ClientsTotal { get; set; }

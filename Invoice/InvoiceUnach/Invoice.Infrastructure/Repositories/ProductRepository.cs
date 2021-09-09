@@ -43,5 +43,10 @@ namespace Invoice.Infrastructure.Repositories
         {
             return await _dbContext.Products.FirstOrDefaultAsync(x => x.Code == code);
         }
+
+        public void Delete(Product product)
+        {
+            _dbContext.Products.Remove(product);
+        }
     }
 }

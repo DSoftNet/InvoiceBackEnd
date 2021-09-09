@@ -9,6 +9,8 @@ namespace Invoice.Admin.Models
     {
         [TempData] public string Option { get; set; }
 
+        [BindProperty] public Guid UserId { get; set; }
+        
         [BindProperty] public InputProduct InputProductModel { get; set; }
 
         [BindProperty] public List<InputProduct> InputProducts { get; set; }
@@ -16,6 +18,7 @@ namespace Invoice.Admin.Models
         public class InputProduct
         {
             public Guid Id { get; set; }
+            
             [Required(ErrorMessage = "Campo obligatorio")]
             [StringLength(50, ErrorMessage = "Digite máximo 50 caracteres.")]
             public string Name { get; set; }
@@ -47,22 +50,6 @@ namespace Invoice.Admin.Models
             public bool Status { get; set; }
 
             public Guid UserId { get; set; }
-
-            public InputProduct(Guid id, string name, string description, string code, decimal price, bool isIva, int stock,
-                bool isExpiration, DateTime expirationAt, bool status, Guid userId)
-            {
-                Id = id;
-                Name = name;
-                Description = description;
-                Code = code;
-                Price = price;
-                IsIva = isIva;
-                Stock = stock;
-                IsExpiration = isExpiration;
-                ExpirationAt = expirationAt;
-                Status = status;
-                UserId = userId;
-            }
         }
     }
 }

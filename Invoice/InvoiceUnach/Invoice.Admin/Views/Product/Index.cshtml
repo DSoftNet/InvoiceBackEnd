@@ -12,9 +12,18 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-title">
-                <h2>Listado de productos</h2>
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <h2>Listado de productos</h2>
+                    </div>
+
+                </div>
             </div>
             <div class="card-body">
+                <div class="col-md-12">
+                    <a class="btn btn-primary btn-sm float-right" asp-action="LoadFormCreate" asp-route-userId="@Model.UserId">Agregar <i class="fa fa-plus"></i></a>
+                </div>
+                <br/><br/>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -53,6 +62,11 @@
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
                                 </td>
+                                <td>
+                                    <a asp-action="Delete" asp-route-productId="@product.Id" asp-route-userId="@product.UserId" class="btn btn-danger btn-sm text-white">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
                             </tr>
                         }
                         </tbody>
@@ -61,8 +75,192 @@
                 </div>
             </div>
             <div class="card-footer">
-
+                <a class="btn btn-outline-secondary btn-sm" href="../UserDetail/Index?userId=@Model.UserId"><i class="fa fa-angle-left"></i> Volver</a>
             </div>
         </div>
+    </div>
+}
+@if (Model.Option == "Edit")
+{
+    <div class="col-md-12">
+        <form method="post" asp-controller="Product" asp-action="Update">
+            <div class="card">
+                <div class="card-title">
+                    <div class="col-md-12">
+                        <h2>Editar</h2>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="@Model.InputProductModel.Id"/>
+                    @Html.HiddenFor(model => model.Option)
+                    @Html.HiddenFor(model => model.InputProductModel.UserId)
+                    <div class="row">
+                        <div class="col">
+                            <label>Nombre:</label>
+                            <input asp-for="InputProductModel.Name" class="form-control" placeholder="Nombre">
+                            <span asp-validation-for="InputProductModel.Name" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Descripción:</label>
+                            <input asp-for="InputProductModel.Description" class="form-control" placeholder="Descripción">
+                            <span asp-validation-for="InputProductModel.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <label>Código:</label>
+                            <input asp-for="InputProductModel.Code" class="form-control" placeholder="Código">
+                            <span asp-validation-for="InputProductModel.Code" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Precio:</label>
+                            <input asp-for="InputProductModel.Price" class="form-control" placeholder="Precio">
+                            <span asp-validation-for="InputProductModel.Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <label>Stock:</label>
+                            <input asp-for="InputProductModel.Stock" class="form-control" placeholder="Stock">
+                            <span asp-validation-for="InputProductModel.Stock" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>¿Tiene IVA?:</label>
+                            <select asp-for="InputProductModel.IsIva" class="form-control">
+                                <option value="true">Si</option>
+                                <option value="false">No</option>
+                            </select>
+                            <span asp-validation-for="InputProductModel.IsIva" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <label>¿Este producto expira?:</label>
+                            <select asp-for="InputProductModel.IsExpiration" class="form-control">
+                                <option value="true">Si</option>
+                                <option value="false">No</option>
+                            </select>
+                            <span asp-validation-for="InputProductModel.IsExpiration" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Fecha de expiración:</label>
+                            <input asp-for="InputProductModel.ExpirationAt" type="date" class="form-control" placeholder="Stock">
+                            <span asp-validation-for="InputProductModel.ExpirationAt" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>¿Estado del producto:</label>
+                            <select asp-for="InputProductModel.Status" class="form-control">
+                                <option value="true">Activo</option>
+                                <option value="false">Inactivo</option>
+                            </select>
+                            <span asp-validation-for="InputProductModel.Status" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-outline-secondary btn-sm" href="../Product/Index?userId=@Model.InputProductModel.UserId"><i class="fa fa-angle-left"></i> Volver</a>
+                    <button class="btn btn-outline-success btn-sm" type="submit">Actualizar <i class="fa fa-save"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+@if (Model.Option == "Add")
+{
+    <div class="col-md-12">
+        <form method="post" asp-controller="Product" asp-action="Create">
+            <div class="card">
+                <div class="card-title">
+                    <div class="col-md-12">
+                        <h2>Editar</h2>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @Html.HiddenFor(model => model.Option)
+                    @Html.HiddenFor(model => model.UserId)
+                    <div class="row">
+                        <div class="col">
+                            <label>Nombre:</label>
+                            <input asp-for="InputProductModel.Name" class="form-control" placeholder="Nombre">
+                            <span asp-validation-for="InputProductModel.Name" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Descripción:</label>
+                            <input asp-for="InputProductModel.Description" class="form-control" placeholder="Descripción">
+                            <span asp-validation-for="InputProductModel.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <label>Código:</label>
+                            <input asp-for="InputProductModel.Code" class="form-control" placeholder="Código">
+                            <span asp-validation-for="InputProductModel.Code" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Precio:</label>
+                            <input asp-for="InputProductModel.Price" class="form-control" placeholder="Precio">
+                            <span asp-validation-for="InputProductModel.Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <label>Stock:</label>
+                            <input asp-for="InputProductModel.Stock" class="form-control" placeholder="Stock">
+                            <span asp-validation-for="InputProductModel.Stock" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>¿Tiene IVA?:</label>
+                            <select asp-for="InputProductModel.IsIva" class="form-control">
+                                <option value="true">Si</option>
+                                <option value="false">No</option>
+                            </select>
+                            <span asp-validation-for="InputProductModel.IsIva" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <label>¿Este producto expira?:</label>
+                            <select id="expirationCreate" asp-for="InputProductModel.IsExpiration" class="form-control">
+                                <option selected>Seleccione una opción</option>
+                                <option value="true">Si</option>
+                                <option value="false">No</option>
+                            </select>
+                            <span asp-validation-for="InputProductModel.IsExpiration" class="text-danger"></span>
+                        </div>
+                        <div id="ExpirationAtCreate" class="col">
+                            <label>Fecha de expiración:</label>
+                            <input asp-for="InputProductModel.ExpirationAt"  type="date" class="form-control" placeholder="Stock">
+                            <span asp-validation-for="InputProductModel.ExpirationAt" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>¿Estado del producto:</label>
+                            <select asp-for="InputProductModel.Status" class="form-control">
+                                <option value="true">Activo</option>
+                                <option value="false">Inactivo</option>
+                            </select>
+                            <span asp-validation-for="InputProductModel.Status" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-outline-secondary btn-sm" href="../Product/Index?userId=@Model.UserId"><i class="fa fa-angle-left"></i> Volver</a>
+                    <button class="btn btn-outline-success btn-sm" type="submit">Guardar <i class="fa fa-save"></i></button>
+                </div>
+            </div>
+        </form>
     </div>
 }

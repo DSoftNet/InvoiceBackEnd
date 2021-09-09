@@ -19,7 +19,7 @@ namespace Invoice.Admin.Controllers
         {
             _logger = logger;
             _userRepository = userRepository;
-        }
+        }   
 
         #region Public Methods
 
