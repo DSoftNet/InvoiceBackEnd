@@ -1,6 +1,6 @@
 ﻿@model Invoice.Admin.Models.SubsidiaryModel;
 @{
-    ViewBag.Title = "Facturación|Sucursales";
+    ViewBag.Title = "Facturación | Sucursales";
     Layout = "_Layout";
 }
 <div class="col-md-12">
@@ -15,6 +15,9 @@
                 <h2>Listado de Sucursales</h2>
             </div>
             <div class="card-body">
+                <div class="col-md-12">
+                    <a class="btn btn-primary btn-sm float-right" asp-action="LoadFormCreate" asp-route-userId="@Model.UserId">Agregar <i class="fa fa-plus"></i></a>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -96,6 +99,55 @@
                 <div class="card-footer">
                     <a class="btn btn-outline-secondary btn-sm"><i class="fa fa-angle-left"></i> Volver</a>
                     <button class="btn btn-outline-success btn-sm" type="submit">Actualizar <i class="fa fa-save"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+@if (Model.Option == "Add")
+{
+    <div class="col-md-12">
+        <form method="post" asp-controller="Subsidiary" asp-action="Create">
+            <div class="card">
+                <div class="card-title">
+                    <div class="col-md-12">
+                        <h2>Nuevo</h2>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @Html.HiddenFor(model => model.Option)
+                    @Html.HiddenFor(model => model.UserId)
+                    <div class="row">
+                        <div class="col">
+                            <label>Nombre:</label>
+                            <input asp-for="InputSubsidiaryModel.Name" class="form-control" placeholder="Nombre">
+                            <span asp-validation-for="InputSubsidiaryModel.Name" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Dirección:</label>
+                            <input asp-for="InputSubsidiaryModel.Address" class="form-control" placeholder="Dirección">
+                            <span asp-validation-for="InputSubsidiaryModel.Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <label>Teléfono1:</label>
+                            <input asp-for="InputSubsidiaryModel.Phone1" class="form-control" placeholder="Teléfono1">
+                            <span asp-validation-for="InputSubsidiaryModel.Phone1" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Teléfono2:</label>
+                            <input asp-for="InputSubsidiaryModel.Phone2" class="form-control" placeholder="Teléfono2">
+                            <span asp-validation-for="InputSubsidiaryModel.Phone2" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-outline-secondary btn-sm" href="../Subsidiary/Index?userId=@Model.UserId"><i class="fa fa-angle-left"></i> Volver</a>
+                    <button class="btn btn-outline-success btn-sm" type="submit">Guardar <i class="fa fa-save"></i></button>
                 </div>
             </div>
         </form>

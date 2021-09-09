@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Invoice.Admin.Models;
+using Invoice.Domain.Entities;
 using Invoice.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -68,6 +69,7 @@ namespace Invoice.Admin.Controllers
             var subsidiaryModel = new SubsidiaryModel();
 
             subsidiaryModel.Option = "List";
+            subsidiaryModel.UserId = userId;
 
             subsidiaryModel.InputSubsidiaries = new List<SubsidiaryModel.InputSubsidiary>();
 
@@ -91,6 +93,42 @@ namespace Invoice.Admin.Controllers
             
         }
         
+        #endregion
+        
+        #region Methods Create
+
+        public IActionResult LoadFormCreate(Guid userId)
+        {
+            var subsidiaryModel = new SubsidiaryModel();
+            subsidiaryModel.Option = "Add";
+            subsidiaryModel.UserId = userId;
+
+            return View("Index", subsidiaryModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(SubsidiaryModel subsidiaryModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var subsidiary = new Subsidiary(subsidiaryModel.InputSubsidiaryModel.Name,
+                    subsidiaryModel.InputSubsidiaryModel.Address, subsidiaryModel.InputSubsidiaryModel.Phone1,
+                    subsidiaryModel.InputSubsidiaryModel.Phone2,
+                    subsidiaryModel.UserId);
+
+                _subsidiaryRepository.Add(subsidiary );
+                await _subsidiaryRepository.UnitOfWork.SaveEntitiesAsync();
+
+                subsidiaryModel = await GetSubsidiaries(subsidiaryModel.UserId);
+
+                return await Task.Run(() => View("Index", subsidiaryModel));
+            }
+            else
+            {
+                return await Task.Run(() => View("Index", subsidiaryModel));
+            }
+        }
+
         #endregion
         
     }

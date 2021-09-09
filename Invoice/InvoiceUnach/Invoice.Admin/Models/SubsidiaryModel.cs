@@ -9,6 +9,7 @@ namespace Invoice.Admin.Models
     {
         [TempData] public string Option { get; set; }
         
+        [BindProperty] public Guid UserId { get; set; }
         [BindProperty] public InputSubsidiary InputSubsidiaryModel { get; set; }
         [BindProperty] public List<InputSubsidiary> InputSubsidiaries  { get; set; }
 
