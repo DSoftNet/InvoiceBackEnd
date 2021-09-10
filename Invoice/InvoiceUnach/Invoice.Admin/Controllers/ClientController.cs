@@ -13,11 +13,13 @@ namespace Invoice.Admin.Controllers
     {
         private readonly ILogger<ClientController> _logger;
        private readonly IClientRepository _clientRepository;
+       private readonly IItemCatalogRepository _itemCatalogRepository;
 
-       public ClientController(ILogger<ClientController> logger, IClientRepository clientRepository)
+       public ClientController(ILogger<ClientController> logger, IClientRepository clientRepository, IItemCatalogRepository itemCatalogRepository)
        {
            _logger = logger;
            _clientRepository = clientRepository;
+           _itemCatalogRepository = itemCatalogRepository;
        }
        
        public async Task<IActionResult> Index(Guid userId)

@@ -254,6 +254,14 @@
                             </select>
                             <span asp-validation-for="InputClientModel.Status" class="text-danger"></span>
                         </div>
+                        <div class="col-6">
+                                                    <label>Estado</label>
+                                                    <select asp-for="InputClientModel.Status" class="form-control">
+                                                        <option value="true">Activo</option>
+                                                        <option value="false">Inactivo</option>
+                                                    </select>
+                                                    <span asp-validation-for="InputClientModel.Status" class="text-danger"></span>
+                                                </div>
                     </div>
                 </div>
                 <div class="card-footer">
