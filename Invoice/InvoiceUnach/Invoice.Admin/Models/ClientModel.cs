@@ -8,7 +8,7 @@ namespace Invoice.Admin.Models
     public class ClientModel
     {
         [TempData] public string Option { get; set; }
-
+        [BindProperty] public Guid UserId { get; set; }
         [BindProperty] public InputClient InputClientModel { get; set; }
 
         [BindProperty] public List<InputClient> InputClients { get; set; }
@@ -47,24 +47,6 @@ namespace Invoice.Admin.Models
             public bool Status { get;  set; }
             public Guid UserId { get;  set; }
             
-           /* public InputClient(Guid id, string firstName, string secondName, string firstLastName,
-                string secondLastName, string identificationType, string identification, string email, string address,
-                string phone, string cellPhone, bool status, Guid userId)
-            {
-                Id = id;
-                FirstName = firstName;
-                SecondName = secondName;
-                FirstLastName = firstLastName;
-                SecondLastName = secondLastName;
-                IdentificationType = identificationType;
-                Identification = identification;
-                Email = email;
-                Address = address;
-                Phone = phone;
-                CellPhone = cellPhone;
-                Status = status;
-                UserId = userId;
-            }*/
         }
     }
 }

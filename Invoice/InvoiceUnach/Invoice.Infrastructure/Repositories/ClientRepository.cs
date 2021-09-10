@@ -48,5 +48,9 @@ namespace Invoice.Infrastructure.Repositories
         {
             return await _dbContext.Clients.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         }
+        public void Delete(Client client)
+        {
+            _dbContext.Clients.Remove(client);
+        }
     }
 }
