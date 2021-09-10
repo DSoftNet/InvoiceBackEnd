@@ -10,3 +10,13 @@ $("#expirationCreate").on("change", function () {
     else
         $('#ExpirationAtCreate').hide();
 });
+
+$("#expirationCreate").on("change", function () {
+    let status = $(this).val();
+
+    if (status==="true")
+        $('#ExpirationAtCreate').show();
+    else
+        $('#ExpirationAtCreate').hide();
+});
+
