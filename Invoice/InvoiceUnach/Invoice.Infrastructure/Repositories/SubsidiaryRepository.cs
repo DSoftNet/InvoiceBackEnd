@@ -38,10 +38,15 @@ namespace Invoice.Infrastructure.Repositories
         {
             return _dbContext.Subsidiaries.Update(subsidiary).Entity;
         }
+        public void Delete(Subsidiary subsidiary)
+        {
+            _dbContext.Subsidiaries.Remove(subsidiary);
+        }
 
         public async Task<Subsidiary> GetByIdAndUserId(Guid id, Guid userId)
         {
             return await _dbContext.Subsidiaries.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         }
+        
     }
 }

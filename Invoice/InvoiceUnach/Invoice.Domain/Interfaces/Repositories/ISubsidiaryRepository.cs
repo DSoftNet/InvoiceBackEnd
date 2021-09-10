@@ -13,5 +13,6 @@ namespace Invoice.Domain.Interfaces.Repositories
         Subsidiary Add(Subsidiary catalog);
         Subsidiary Update(Subsidiary subsidiary);
         Task<Subsidiary> GetByIdAndUserId(Guid id, Guid userId);
+        void Delete(Subsidiary subsidiary);
     }
 }

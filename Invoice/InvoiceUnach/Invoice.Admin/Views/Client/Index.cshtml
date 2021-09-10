@@ -6,6 +6,7 @@
 }
 <div class="col-md-12">
     <h1>Client</h1>
+    <h1>Client</h1>
 </div>
 @if (Model.Option == "List")
 {
@@ -15,6 +16,7 @@
                 <h2>Listado de clientes</h2>
             </div>
             <div class="card-body">
+               <a class="btn btn-primary btn-sm float-right" asp-action="LoadFormCreate" asp-route-userId="@Model.UserId">Agregar <i class="fa fa-plus"></i></a>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -52,7 +54,7 @@
                                     <a asp-action="LoadClient" asp-route-clientId="@client.Id" class="btn btn-warning btn-sm text-white">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a class="btn btn-danger btn-sm text-white">
+                                    <a asp-action="Delete" asp-route-clientId="@client.Id" asp-route-userId="@client.UserId" class="btn btn-danger btn-sm text-white">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>
@@ -64,7 +66,8 @@
                 </div>
             </div>
             <div class="card-footer">
-
+                     <a class="btn btn-outline-secondary btn-sm" href="../UserDetail/Index?userId=@Model.UserId"><i class="fa fa-angle-left"></i> Volver</a>
+         
             </div>
         </div>
     </div>
@@ -81,12 +84,16 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="@Model.InputClientModel.Id"/>
                     @Html.HiddenFor(model => model.Option)
+                    @Html.HiddenFor(model => model.InputClientModel.UserId)
+                                      
                     <div class="row">
                         <div class="col">
+                            <label>Primer Nombre:</label>
                             <input asp-for="InputClientModel.FirstName" class="form-control" placeholder="FirstName">
                             <span asp-validation-for="InputClientModel.FirstName" class="text-danger"></span>
                         </div>
                         <div class="col">
+                            <label>Segundo Nombre:</label>
                             <input asp-for="InputClientModel.SecondName" class="form-control" placeholder="SecondName">
                             <span asp-validation-for="InputClientModel.SecondName" class="text-danger"></span>
                         </div>
@@ -94,10 +101,12 @@
                     <br/>
                     <div class="row">
                         <div class="col">
+                            <label>Primer Apellido:</label>
                             <input asp-for="InputClientModel.FirstLastName" class="form-control" placeholder="FirstLastName">
                             <span asp-validation-for="InputClientModel.FirstLastName" class="text-danger"></span>
                         </div>
                         <div class="col">
+                            <label>Segundo Apellido:</label>
                             <input asp-for="InputClientModel.SecondLastName" class="form-control" placeholder="SecondLastName">
                             <span asp-validation-for="InputClientModel.SecondLastName" class="text-danger"></span>
                         </div>
@@ -105,10 +114,12 @@
                     <br/>
                     <div class="row">
                         <div class="col">
+                             <label>Tipo de Identidicación:</label>
                             <input asp-for="InputClientModel.IdentificationType" class="form-control" placeholder="IdentificationType">
                             <span asp-validation-for="InputClientModel.IdentificationType" class="text-danger"></span>
-                            </div>
+                        </div>
                         <div class="col">
+                             <label>Identificación:</label>
                             <input asp-for="InputClientModel.Identification" class="form-control" placeholder="Identification">
                             <span asp-validation-for="InputClientModel.Identification" class="text-danger"></span>
                         </div>
@@ -116,10 +127,12 @@
                     <br/>
                     <div class="row">
                         <div class="col">
+                             <label>Correo Electrónico:</label>
                             <input asp-for="InputClientModel.Email" class="form-control" placeholder="Email">
                             <span asp-validation-for="InputClientModel.Email" class="text-danger"></span>
-                            </div>
+                        </div>
                         <div class="col">
+                         <label>Dirección:</label>
                             <input asp-for="InputClientModel.Address" class="form-control" placeholder="Address">
                             <span asp-validation-for="InputClientModel.Address" class="text-danger"></span>
                         </div>
@@ -127,10 +140,12 @@
                     <br/>
                     <div class="row">
                         <div class="col">
+                            <label>Teléfono:</label>
                             <input asp-for="InputClientModel.Phone" class="form-control" placeholder="Phone">
                             <span asp-validation-for="InputClientModel.Phone" class="text-danger"></span>
                         </div>
                         <div class="col">
+                            <label>Celular:</label>
                             <input asp-for="InputClientModel.CellPhone" class="form-control" placeholder="Cell Phone">
                             <span asp-validation-for="InputClientModel.CellPhone" class="text-danger"></span>
                         </div>
@@ -138,8 +153,113 @@
                     <br/>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-outline-secondary btn-sm"><i class="fa fa-angle-left"></i> Volver</a>
-                    <button class="btn btn-outline-success btn-sm" type="submit">Actualizar <i class="fa fa-save"></i></button>
+                 <a class="btn btn-outline-secondary btn-sm" href="../Client/Index?userId=@Model.InputClientModel.UserId"><i class="fa fa-angle-left"></i> Volver</a>
+                 <button class="btn btn-outline-success btn-sm" type="submit">Actualizar <i class="fa fa-save"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+}
+@if (Model.Option == "Add")
+{
+    <div class="col-md-12">
+        <form method="post" asp-controller="Client" asp-action="Create">
+            <div class="card">
+                <div class="card-title">
+                    <h2>Nuevo Cliente</h2>
+                </div>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @Html.HiddenFor(model => model.Option)
+                    @Html.HiddenFor(model => model.UserId)
+                    <div class="row">
+                        <div class="col">
+                            <label>First Name</label>
+
+                            <input asp-for="InputClientModel.FirstName" class="form-control" placeholder="FirstName">
+                            <span asp-validation-for="InputClientModel.FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Second Name</label>
+                            <input asp-for="InputClientModel.SecondName" class="form-control" placeholder="SecondName">
+                            <span asp-validation-for="InputClientModel.SecondName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <label>First Last Name</label>
+                            <input asp-for="InputClientModel.FirstLastName" class="form-control" placeholder="FirstLastName">
+                            <span asp-validation-for="InputClientModel.FirstLastName" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Second Last Name</label>
+                            <input asp-for="InputClientModel.SecondLastName" class="form-control" placeholder="SecondLastName">
+                            <span asp-validation-for="InputClientModel.SecondLastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <label>Identification Type</label>
+                            <input asp-for="InputClientModel.IdentificationType" class="form-control" placeholder="IdentificationType">
+                            <span asp-validation-for="InputClientModel.IdentificationType" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Identification</label>
+                            <input asp-for="InputClientModel.Identification" class="form-control" placeholder="Identification">
+                            <span asp-validation-for="InputClientModel.Identification" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <label>Email</label>
+                            <input asp-for="InputClientModel.Email" class="form-control" placeholder="Email">
+                            <span asp-validation-for="InputClientModel.Email" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Address</label>
+                            <input asp-for="InputClientModel.Address" class="form-control" placeholder="Address">
+                            <span asp-validation-for="InputClientModel.Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col">
+                            <label>Phone</label>
+                            <input asp-for="InputClientModel.Phone" class="form-control" placeholder="Phone">
+                            <span asp-validation-for="InputClientModel.Phone" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label>Cell Phone</label>
+                            <input asp-for="InputClientModel.CellPhone" class="form-control" placeholder="Cell Phone">
+                            <span asp-validation-for="InputClientModel.CellPhone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Estado</label>
+                            <select asp-for="InputClientModel.Status" class="form-control">
+                                <option value="true">Activo</option>
+                                <option value="false">Inactivo</option>
+                            </select>
+                            <span asp-validation-for="InputClientModel.Status" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                                                    <label>Estado</label>
+                                                    <select asp-for="InputClientModel.Status" class="form-control">
+                                                        <option value="true">Activo</option>
+                                                        <option value="false">Inactivo</option>
+                                                    </select>
+                                                    <span asp-validation-for="InputClientModel.Status" class="text-danger"></span>
+                                                </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-outline-secondary btn-sm" href="../Client/Index?userId=@Model.UserId"><i class="fa fa-angle-left"></i> Volver</a>
+                    <button class="btn btn-outline-success btn-sm" type="submit">Guardar <i class="fa fa-save"></i></button>
                 </div>
             </div>
         </form>

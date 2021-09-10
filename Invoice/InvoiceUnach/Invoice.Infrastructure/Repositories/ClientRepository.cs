@@ -38,6 +38,10 @@ namespace Invoice.Infrastructure.Repositories
         {
             return _dbContext.Clients.Add(client).Entity;
         }
+        public void Delete(Client client)
+        {
+            _dbContext.Clients.Remove(client);
+        }
 
         public Client Update(Client client)
         {

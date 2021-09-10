@@ -41,7 +41,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-danger btn-sm text-white">
+                                    <a asp-action="Delete" asp-route-subsidiaryId="@subsidiary.Id" asp-route-userId="@subsidiary.UserId"class="btn btn-danger btn-sm text-white">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="card-footer">
-
+                  <a class="btn btn-outline-secondary btn-sm" href="../UserDetail/Index?userId=@Model.UserId"><i class="fa fa-angle-left"></i> Volver</a>
             </div>
         </div>
     </div>
@@ -70,12 +70,16 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="@Model.InputSubsidiaryModel.Id"/>
                     @Html.HiddenFor(model => model.Option)
+                    @Html.HiddenFor(model => model.InputSubsidiaryModel.UserId)
+                                       
                     <div class="row">
                         <div class="col">
+                            <label>Nombre:</label>
                             <input asp-for="InputSubsidiaryModel.Name" class="form-control" placeholder="Nombre">
                             <span asp-validation-for="InputSubsidiaryModel.Name" class="text-danger"></span>
                         </div>
                         <div class="col">
+                            <label>Dirección:</label>
                             <input asp-for="InputSubsidiaryModel.Address" class="form-control" placeholder="Dirección">
                             <span asp-validation-for="InputSubsidiaryModel.Address" class="text-danger"></span>
                         </div>
@@ -83,10 +87,12 @@
                     <br/>
                     <div class="row">
                         <div class="col">
+                            <label>Teléfono1:</label>
                             <input asp-for="InputSubsidiaryModel.Phone1" class="form-control" placeholder="Teléfono1">
                             <span asp-validation-for="InputSubsidiaryModel.Phone1" class="text-danger"></span>
                         </div>
                         <div class="col">
+                            <label>Teléfono2:</label>
                             <input asp-for="InputSubsidiaryModel.Phone2" class="form-control" placeholder="Teléfono2">
                             <span asp-validation-for="InputSubsidiaryModel.Phone2" class="text-danger"></span>
                         </div>
@@ -94,7 +100,7 @@
                     <br/>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-outline-secondary btn-sm"><i class="fa fa-angle-left"></i> Volver</a>
+                     <a class="btn btn-outline-secondary btn-sm" href="../Subsidiary/Index?userId=@Model.InputSubsidiaryModel.UserId"><i class="fa fa-angle-left"></i> Volver</a>
                     <button class="btn btn-outline-success btn-sm" type="submit">Actualizar <i class="fa fa-save"></i></button>
                 </div>
             </div>

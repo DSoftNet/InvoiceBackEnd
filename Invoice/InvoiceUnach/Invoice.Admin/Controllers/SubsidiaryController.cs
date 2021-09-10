@@ -24,7 +24,9 @@ namespace Invoice.Admin.Controllers
         {
             return View(await GetSubsidiaries(userId));
         }
-        
+
+        #region Methods Update
+
         public async Task<IActionResult> LoadSubsidiary(Guid subsidiaryId)
         {
             var subsidiaryModel = new SubsidiaryModel();
@@ -52,14 +54,43 @@ namespace Invoice.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var subsidiary = await _subsidiaryRepository.GetById(subsidiaryModel.InputSubsidiaryModel.Id);
+                
+                subsidiary.SetName(subsidiaryModel.InputSubsidiaryModel.Name);
+                subsidiary.SetAddress(subsidiaryModel.InputSubsidiaryModel.Address);
+                subsidiary.SetPhone1(subsidiaryModel.InputSubsidiaryModel.Phone1);
+                subsidiary.SetPhone2(subsidiaryModel.InputSubsidiaryModel.Phone2);
+                
+                _subsidiaryRepository.Update(subsidiary);
+                await _subsidiaryRepository.UnitOfWork.SaveEntitiesAsync();
+
+                subsidiaryModel = await GetSubsidiaries(subsidiaryModel.InputSubsidiaryModel.UserId);
+
+                return await Task.Run(() => View("Index", subsidiaryModel));
             }
             else
             {
                 return await Task.Run(() => View("Index", subsidiaryModel));
             }
-
-            return View();
         }
+
+        #endregion
+        #region Methods Delete
+
+        public async Task<IActionResult> Delete(Guid subsidiaryId, Guid userId)
+        {
+            var subsidiary = await _subsidiaryRepository.GetById(subsidiaryId);
+
+            _subsidiaryRepository.Delete(subsidiary);
+            await _subsidiaryRepository.UnitOfWork.SaveEntitiesAsync();
+
+            var subsidiaryModel = await GetSubsidiaries(userId);
+
+            return View("Index", subsidiaryModel);
+        }
+
+        #endregion
+       
         
         #region Private Methods
         
@@ -68,6 +99,7 @@ namespace Invoice.Admin.Controllers
             var subsidiaryModel = new SubsidiaryModel();
 
             subsidiaryModel.Option = "List";
+            subsidiaryModel.UserId = userId;
 
             subsidiaryModel.InputSubsidiaries = new List<SubsidiaryModel.InputSubsidiary>();
 
