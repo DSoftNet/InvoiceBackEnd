@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Invoice.Admin.Models;
+using Invoice.Domain.Entities;
 using Invoice.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,6 +16,7 @@ namespace Invoice.Admin.Controllers
 
        public ClientController(ILogger<ClientController> logger, IClientRepository clientRepository)
        {
+           _logger = logger;
            _logger = logger;
            _clientRepository = clientRepository;
        }
@@ -99,6 +101,44 @@ namespace Invoice.Admin.Controllers
            var clientModel = await GetClients(userId);
 
            return View("Index", clientModel);
+       }
+
+       #endregion
+       #region Methods Create
+
+       public IActionResult LoadFormCreate(Guid userId)
+       {
+           var clientModel = new ClientModel();
+           clientModel.Option = "Add";
+           clientModel.UserId = userId;
+
+           return View("Index", clientModel);
+       }
+
+       [HttpPost]
+       public async Task<IActionResult> Create(ClientModel clientModel)
+       {
+           if (ModelState.IsValid)
+           {
+                   var client = new Client(clientModel.InputClientModel.FirstName,
+                   clientModel.InputClientModel.SecondName, clientModel.InputClientModel.FirstLastName,
+                   clientModel.InputClientModel.SecondLastName, clientModel.InputClientModel.IdentificationType,
+                   clientModel.InputClientModel.Identification, clientModel.InputClientModel.Email,
+                   clientModel.InputClientModel.Address, clientModel.InputClientModel.Phone,
+                   clientModel.InputClientModel.CellPhone, clientModel.InputClientModel.Status,
+                   clientModel.UserId);
+
+               _clientRepository.Add(client);
+               await _clientRepository.UnitOfWork.SaveEntitiesAsync();
+
+               clientModel = await GetClients(clientModel.UserId);
+
+               return await Task.Run(() => View("Index", clientModel));
+           }
+           else
+           {
+               return await Task.Run(() => View("Index", clientModel));
+           }
        }
 
        #endregion
