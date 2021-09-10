@@ -8,6 +8,7 @@ namespace Invoice.Admin.Models
     public class ClientModel
     {
         [TempData] public string Option { get; set; }
+        [BindProperty] public Guid UserId { get; set; }
 
         [BindProperty] public InputClient InputClientModel { get; set; }
 

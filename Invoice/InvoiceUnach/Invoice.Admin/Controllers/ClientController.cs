@@ -23,11 +23,11 @@ namespace Invoice.Admin.Controllers
        {
            return View(await GetClients(userId));
        }
-
+       
+       #region Methods Update
        public async Task<IActionResult> LoadClient(Guid clientId)
        {
            var clientModel = new ClientModel();
-
            clientModel.Option = "Edit";
             
            var client = await _clientRepository.GetById(clientId);
@@ -52,28 +52,65 @@ namespace Invoice.Admin.Controllers
 
            return View("Index", clientModel);
        }
-       
+
        [HttpPost]
        public async Task<IActionResult> Update(ClientModel clientModel)
        {
            if (ModelState.IsValid)
            {
+               var client = await _clientRepository.GetById(clientModel.InputClientModel.Id);
+
+               client.SetFirstName(clientModel.InputClientModel.FirstName);
+               client.SetSecondName(clientModel.InputClientModel.SecondName);
+               client.SetFirstLastName(clientModel.InputClientModel.FirstLastName);
+               client.SetSecondLastName(clientModel.InputClientModel.SecondLastName);
+               client.SetIdentificationType(clientModel.InputClientModel.IdentificationType);
+               client.SetIdentification(clientModel.InputClientModel.Identification);
+               client.SetEmail(clientModel.InputClientModel.Email);
+               client.SetAddress(clientModel.InputClientModel.Address);
+               client.SetPhone(clientModel.InputClientModel.Phone);
+               client.SetCellPhone(clientModel.InputClientModel.CellPhone);
+               client.SetStatus(clientModel.InputClientModel.Status);
+               
+
+               _clientRepository.Update(client);
+               await _clientRepository.UnitOfWork.SaveEntitiesAsync();
+
+               clientModel = await GetClients(clientModel.InputClientModel.UserId);
+
+               return await Task.Run(() => View("Index", clientModel));
            }
            else
            {
                return await Task.Run(() => View("Index", clientModel));
            }
-
-           return View();
        }
+
+       #endregion
+       #region Methods Delete
+
+       public async Task<IActionResult> Delete(Guid clientId, Guid userId)
+       {
+           var client = await _clientRepository.GetById(clientId);
+
+           _clientRepository.Delete(client);
+           await _clientRepository.UnitOfWork.SaveEntitiesAsync();
+
+           var clientModel = await GetClients(userId);
+
+           return View("Index", clientModel);
+       }
+
+       #endregion
 
        #region Private Methods
 
        private async Task<ClientModel> GetClients(Guid userId)
        {
            var clientModel = new ClientModel();
-
+           
            clientModel.Option = "List";
+           clientModel.UserId = userId;
 
            clientModel.InputClients = new List<ClientModel.InputClient>();
 
