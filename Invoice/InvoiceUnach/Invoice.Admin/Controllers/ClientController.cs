@@ -24,8 +24,11 @@ namespace Invoice.Admin.Controllers
        
        public async Task<IActionResult> Index(Guid userId)
        {
+           
            return View(await GetClients(userId));
+           
        }
+       
        #region Methods Update
 
        public async Task<IActionResult> LoadClient(Guid clientId)
@@ -183,6 +186,14 @@ namespace Invoice.Admin.Controllers
            return clientModel;
            
        }
+       private async Task<ActionResult> Get(Guid id)
+       {
+           var detalle = new ClientModel();
+           var item = await _itemCatalogRepository.GetById(id);
+           detalle.Code = item.Code;
+           return View("Index");
+       }
+       
        #endregion
 
     }
