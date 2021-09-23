@@ -188,9 +188,23 @@ namespace Invoice.Admin.Controllers
        }
        private async Task<ActionResult> Get(Guid id)
        {
-           var detalle = new ClientModel();
-           var item = await _itemCatalogRepository.GetById(id);
-           detalle.Code = item.Code;
+
+           var clientModel = new ClientModel();
+    
+           clientModel.ItemCatalogId = id;
+           clientModel.InputCatalogs = new List<ClientModel.InputCatalog>();
+           var  catalogs = await _itemCatalogRepository.Get();
+ 
+           foreach (var catalog in catalogs)
+           {
+               clientModel.InputCatalogs.Add(
+                   new ClientModel.InputCatalog{
+                       Id = catalog.Id,
+                       Code = catalog.Code,
+                       Name = catalog.Name
+    
+                   });
+           }
            return View("Index");
        }
        

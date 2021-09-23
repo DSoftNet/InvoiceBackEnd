@@ -15,6 +15,12 @@ namespace Invoice.Admin.Models
         [BindProperty] public InputClient InputClientModel { get; set; }
 
         [BindProperty] public List<InputClient> InputClients { get; set; }
+        
+        
+        
+        [BindProperty] public InputCatalog InputCatalogModel { get; set; }
+
+        [BindProperty] public List<InputCatalog> InputCatalogs { get; set; }
 
         public class InputClient
         {
@@ -51,5 +57,16 @@ namespace Invoice.Admin.Models
             public Guid UserId { get;  set; }
             
         }
+
+        public class InputCatalog
+        {
+            public Guid Id { get; set; }
+           
+            
+            public string Code { get;  set; }
+            public string Name { get;  set; }
+        }
+        
+
     }
 }

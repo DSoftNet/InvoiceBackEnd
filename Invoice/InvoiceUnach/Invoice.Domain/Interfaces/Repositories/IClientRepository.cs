@@ -13,7 +13,7 @@ namespace Invoice.Domain.Interfaces.Repositories
         Task<Client> GetByEmail(string email);
         Client Add(Client client);
         Client Update(Client client);
-        void Delete(Client product);
+        void Delete(Client client);
         Task<Client> GetByIdAndUserId(Guid id, Guid userId);
     }
 }

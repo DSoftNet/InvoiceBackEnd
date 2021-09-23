@@ -211,12 +211,11 @@
                         <div class="col">
                             <label>Identification Type</label>
                       
-                            <select asp-for="InputClientModel.IdentificationType" class="form-control">
-                                <option value="@Model.Code">@Model.Code</option>
-                                <option value="@Model.Code">@Model.Code</option>
-                               <option >@Html.HiddenFor(model => model.Code)</option>
-                            </select>
-                            <span asp-validation-for="InputClientModel.Status" class="text-danger"></span>
+                            <label>@Model.Code</label>
+                               
+                                
+                                     
+                          
                         </div>
                         <div class="col">
                             <label>Identification</label>
