@@ -27,10 +27,10 @@ namespace Invoice.Domain.Entities
 
         private readonly List<UserRol> _userRols;
         public IReadOnlyCollection<UserRol> UserRols => _userRols;
-        
+
         private readonly List<Subsidiary> _subsidiaries;
         public IReadOnlyCollection<Subsidiary> Subsidiaries => _subsidiaries;
-        
+
         private readonly List<Client> _clients;
         public IReadOnlyCollection<Client> Clients => _clients;
 
@@ -44,7 +44,7 @@ namespace Invoice.Domain.Entities
             _userRols = new List<UserRol>();
             _subsidiaries = new List<Subsidiary>();
             _clients = new List<Client>();
-            _products=new List<Product>();
+            _products = new List<Product>();
         }
 
         public User(string firstName, string secondName, string firstLastName, string secondLastName,
@@ -144,7 +144,7 @@ namespace Invoice.Domain.Entities
         public void SetStatus(string value)
         {
             if (string.IsNullOrEmpty(value)) throw new InvoiceDomainException("The status is required.");
-            
+
             Status = value;
         }
 
@@ -160,11 +160,11 @@ namespace Invoice.Domain.Entities
 
         public void CreateSubsidiary(string name, string address, string phone1, string phone2)
         {
-            var subsidiary = new Subsidiary(name, address,phone1,phone2, Id);
+            var subsidiary = new Subsidiary(name, address, phone1, phone2, Id);
             _subsidiaries.Add(subsidiary);
         }
-        
-        public void CreateClient(string firstName, string secondName, string firstLastName, string secondLastName, 
+
+        public void CreateClient(string firstName, string secondName, string firstLastName, string secondLastName,
             string identificationType, string identification, string email, string address, string phone,
             string cellPhone, bool status)
         {
@@ -176,12 +176,11 @@ namespace Invoice.Domain.Entities
 
         public void CreateProduct(string name, string description, string code, decimal price, bool isIva, int stock,
             bool isExpiration, DateTime expirationAt, bool status, Guid userId)
-            {
-                var product= new Product(name, description, code, price, isIva,  stock, isExpiration, expirationAt, 
+        {
+            var product = new Product(name, description, code, price, isIva, stock, isExpiration, expirationAt,
                 status, userId);
-                _products.Add(product);
-
-            }
+            _products.Add(product);
+        }
 
         #endregion
     }

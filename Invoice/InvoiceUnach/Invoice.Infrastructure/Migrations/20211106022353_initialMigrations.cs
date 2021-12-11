@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Invoice.Infrastructure.Migrations
 {
-    public partial class invoice : Migration
+    public partial class initialMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,24 +22,6 @@ namespace Invoice.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Catalog", x => x.Id);
                     table.UniqueConstraint("AK_Catalog_Code", x => x.Code);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Subsidiary",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    Phone1 = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Phone2 = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Subsidiary", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,37 +46,6 @@ namespace Invoice.Infrastructure.Migrations
                         principalTable: "Catalog",
                         principalColumn: "Code",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Client",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    SecondName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    FirstLastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    SecondLastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
-                    IdentificationType = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Identification = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CellPhone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    Status = table.Column<bool>(type: "bit", maxLength: 20, nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Client", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Client_ItemCatalog_IdentificationType",
-                        column: x => x.IdentificationType,
-                        principalTable: "ItemCatalog",
-                        principalColumn: "Code",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -136,6 +87,96 @@ namespace Invoice.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Client",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    SecondName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    FirstLastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    SecondLastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    IdentificationType = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Identification = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    CellPhone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    Status = table.Column<bool>(type: "bit", maxLength: 20, nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Client", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Client_ItemCatalog_IdentificationType",
+                        column: x => x.IdentificationType,
+                        principalTable: "ItemCatalog",
+                        principalColumn: "Code",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Client_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Product",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", maxLength: 100, nullable: false),
+                    IsIva = table.Column<bool>(type: "bit", maxLength: 100, nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
+                    IsExpiration = table.Column<bool>(type: "bit", nullable: false),
+                    ExpirationAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Product_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Subsidiary",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    Phone1 = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Phone2 = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Subsidiary", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Subsidiary_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserRol",
                 columns: table => new
                 {
@@ -152,6 +193,12 @@ namespace Invoice.Infrastructure.Migrations
                         principalTable: "ItemCatalog",
                         principalColumn: "Code",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserRol_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -183,6 +230,16 @@ namespace Invoice.Infrastructure.Migrations
                 column: "CodeCatalog");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Product_UserId",
+                table: "Product",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Subsidiary_UserId",
+                table: "Subsidiary",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_User_IdentificationType",
                 table: "User",
                 column: "IdentificationType");
@@ -210,13 +267,16 @@ namespace Invoice.Infrastructure.Migrations
                 name: "Client");
 
             migrationBuilder.DropTable(
+                name: "Product");
+
+            migrationBuilder.DropTable(
                 name: "Subsidiary");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "UserRol");
 
             migrationBuilder.DropTable(
-                name: "UserRol");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "ItemCatalog");

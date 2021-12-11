@@ -10,6 +10,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Invoice/InvoiceUnach/Invoice.Api/Controllers/CatalogController.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1whVr02VC5IitcYCPpyj7Qliw5n" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -28,19 +31,22 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0e9a97ec-28bc-4a25-b075-4647f2a71bc4" name="Default Changelist" comment="" />
+      <changelist id="28e2aa1a-fc54-4700-b41b-adc1fa0e8ba0" name="Changes" comment="" />
       <created>1628911011396</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1628911011396</updated>
       <workItem from="1628911014706" duration="215000" />
+      <workItem from="1636258705229" duration="32000" />
+      <workItem from="1637180817156" duration="430000" />
+      <workItem from="1637330850523" duration="613000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -52,6 +58,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
