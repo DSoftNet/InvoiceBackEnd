@@ -2,10 +2,10 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-WORKDIR /src
+WORKDIR /Invoice.Api
 COPY . .
 WORKDIR /Invoice.Api
-RUN dotnet restore -nowarn:msb3202,nu1503
+RUN dotnet restore
 RUN dotnet build --no-restore -c Release -o /app/build
 
 FROM build AS publish
