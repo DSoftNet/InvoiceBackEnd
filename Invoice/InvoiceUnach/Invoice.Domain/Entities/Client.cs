@@ -20,8 +20,8 @@ namespace Invoice.Domain.Entities
         public string Phone { get; private set; }
         public string CellPhone { get; private set; }
         public bool Status { get; private set; }
-        public DateTime CreateAt { get; private set; }
-        public DateTime UpdateAt { get; private set; }
+        public DateTime CreateAt { get; set; }
+        public DateTime UpdateAt { get;  set; }
         public Guid UserId { get; private set; }
 
         protected Client()
@@ -120,7 +120,7 @@ namespace Invoice.Domain.Entities
 
         public void SetUserId(Guid value)
         {
-            if (value == Guid.Empty) throw new InvoiceDomainException("The userid is required.");
+            //if (value == Guid.Empty) throw new InvoiceDomainException("The userid is required.");
             UserId = value;
         }
 
